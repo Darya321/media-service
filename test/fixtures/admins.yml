@@ -1,0 +1,3 @@
+owner:
+  email: owner@example.test
+  password_digest: <%= BCrypt::Password.create("correct-horse-battery") %>

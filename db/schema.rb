@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_27_000500) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_27_000800) do
+  create_table "admins", force: :cascade do |t|
+    t.string "email", null: false
+    t.string "password_digest", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_admins_on_email", unique: true
+  end
+
   create_table "categories", force: :cascade do |t|
     t.string "name", null: false
     t.string "slug", null: false
@@ -18,6 +26,34 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_27_000500) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["slug"], name: "index_categories_on_slug", unique: true
+  end
+
+  create_table "inquiries", force: :cascade do |t|
+    t.integer "supplier_id"
+    t.integer "material_id", null: false
+    t.string "email", null: false
+    t.string "product_type", null: false
+    t.integer "length_mm", null: false
+    t.integer "width_mm", null: false
+    t.integer "height_mm", null: false
+    t.integer "weight_grams"
+    t.boolean "fragile", default: false, null: false
+    t.integer "quantity", null: false
+    t.decimal "budget", precision: 12, scale: 2
+    t.date "deadline"
+    t.string "region", null: false
+    t.string "print_option", default: "none", null: false
+    t.text "extras", default: "[]", null: false
+    t.decimal "estimated_unit_price", precision: 10, scale: 2
+    t.decimal "estimated_total_price", precision: 12, scale: 2
+    t.decimal "estimated_low_price", precision: 12, scale: 2
+    t.decimal "estimated_high_price", precision: 12, scale: 2
+    t.integer "status", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["material_id"], name: "index_inquiries_on_material_id"
+    t.index ["status"], name: "index_inquiries_on_status"
+    t.index ["supplier_id"], name: "index_inquiries_on_supplier_id"
   end
 
   create_table "materials", force: :cascade do |t|
@@ -54,6 +90,13 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_27_000500) do
     t.index ["status", "published_at"], name: "index_posts_on_status_and_published_at"
   end
 
+  create_table "subscriptions", force: :cascade do |t|
+    t.string "email", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_subscriptions_on_email", unique: true
+  end
+
   create_table "supplier_materials", force: :cascade do |t|
     t.integer "supplier_id", null: false
     t.integer "material_id", null: false
@@ -84,6 +127,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_27_000500) do
     t.index ["slug"], name: "index_suppliers_on_slug", unique: true
   end
 
+  add_foreign_key "inquiries", "materials"
+  add_foreign_key "inquiries", "suppliers"
   add_foreign_key "posts", "categories"
   add_foreign_key "supplier_materials", "materials"
   add_foreign_key "supplier_materials", "suppliers"

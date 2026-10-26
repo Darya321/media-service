@@ -1,0 +1,21 @@
+candle_boxes:
+  supplier: kraft_factory
+  material: microcorrugated
+  email: buyer@example.test
+  product_type: Свечи в стекле
+  length_mm: 90
+  width_mm: 90
+  height_mm: 110
+  weight_grams: 320
+  fragile: true
+  quantity: 500
+  budget: 12000
+  deadline: <%= 20.days.from_now.to_date %>
+  region: Москва
+  print_option: none
+  extras: '[]'
+  estimated_unit_price: 24
+  estimated_total_price: 12000
+  estimated_low_price: 10800
+  estimated_high_price: 13200
+  status: 0

@@ -3,6 +3,7 @@ class Material < ApplicationRecord
 
   has_many :supplier_materials, dependent: :destroy
   has_many :suppliers, through: :supplier_materials
+  has_many :inquiries, dependent: :restrict_with_error
 
   validates :name, presence: true, uniqueness: { case_sensitive: false }
   validates :summary, :description, :use_cases, presence: true
