@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_27_000800) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_27_000900) do
   create_table "admins", force: :cascade do |t|
     t.string "email", null: false
     t.string "password_digest", null: false
@@ -43,7 +43,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_27_000800) do
     t.date "deadline"
     t.string "region", null: false
     t.string "print_option", default: "none", null: false
-    t.text "extras", default: "[]", null: false
+    t.text "extras", default: "[]"
     t.decimal "estimated_unit_price", precision: 10, scale: 2
     t.decimal "estimated_total_price", precision: 12, scale: 2
     t.decimal "estimated_low_price", precision: 12, scale: 2
