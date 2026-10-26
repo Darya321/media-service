@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_27_000200) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_27_000500) do
   create_table "categories", force: :cascade do |t|
     t.string "name", null: false
     t.string "slug", null: false
@@ -18,6 +18,22 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_27_000200) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["slug"], name: "index_categories_on_slug", unique: true
+  end
+
+  create_table "materials", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "slug", null: false
+    t.text "summary", null: false
+    t.text "description", null: false
+    t.text "use_cases", null: false
+    t.integer "strength_score", default: 3, null: false
+    t.integer "print_score", default: 3, null: false
+    t.integer "eco_score", default: 3, null: false
+    t.integer "cost_score", default: 3, null: false
+    t.decimal "price_factor", precision: 6, scale: 3, default: "1.0", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["slug"], name: "index_materials_on_slug", unique: true
   end
 
   create_table "posts", force: :cascade do |t|
@@ -38,5 +54,37 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_27_000200) do
     t.index ["status", "published_at"], name: "index_posts_on_status_and_published_at"
   end
 
+  create_table "supplier_materials", force: :cascade do |t|
+    t.integer "supplier_id", null: false
+    t.integer "material_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["material_id"], name: "index_supplier_materials_on_material_id"
+    t.index ["supplier_id", "material_id"], name: "index_supplier_materials_on_supplier_id_and_material_id", unique: true
+    t.index ["supplier_id"], name: "index_supplier_materials_on_supplier_id"
+  end
+
+  create_table "suppliers", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "slug", null: false
+    t.integer "company_type", default: 0, null: false
+    t.string "specialization", null: false
+    t.text "description", null: false
+    t.integer "minimum_order", default: 0, null: false
+    t.decimal "unit_price_from", precision: 10, scale: 2, default: "0.0", null: false
+    t.text "regions", default: "[]", null: false
+    t.text "services", default: "[]", null: false
+    t.string "contact_email"
+    t.string "contact_url"
+    t.boolean "promoted", default: false, null: false
+    t.boolean "active", default: true, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["active", "company_type"], name: "index_suppliers_on_active_and_company_type"
+    t.index ["slug"], name: "index_suppliers_on_slug", unique: true
+  end
+
   add_foreign_key "posts", "categories"
+  add_foreign_key "supplier_materials", "materials"
+  add_foreign_key "supplier_materials", "suppliers"
 end

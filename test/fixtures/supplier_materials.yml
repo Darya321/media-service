@@ -1,0 +1,7 @@
+factory_microcorrugated:
+  supplier: kraft_factory
+  material: microcorrugated
+
+factory_craft:
+  supplier: kraft_factory
+  material: craft_cardboard

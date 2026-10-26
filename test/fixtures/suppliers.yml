@@ -1,0 +1,29 @@
+kraft_factory:
+  name: Крафт упаковка
+  slug: kraft-packaging
+  company_type: 0
+  specialization: Фабрика картонной упаковки
+  description: Производство коробок по индивидуальным размерам.
+  minimum_order: 500
+  unit_price_from: 18.50
+  regions: '["Москва","Московская область"]'
+  services: '["Печать","Вырубка"]'
+  contact_email: hello@kraft.example
+  contact_url: https://kraft.example
+  promoted: true
+  active: true
+
+inactive_studio:
+  name: Архивная студия
+  slug: archived-studio
+  company_type: 3
+  specialization: Дизайн упаковки
+  description: Эта компания временно скрыта.
+  minimum_order: 0
+  unit_price_from: 0
+  regions: '["Санкт-Петербург"]'
+  services: '["Дизайн"]'
+  contact_email: archive@example.test
+  contact_url:
+  promoted: false
+  active: false

@@ -1,0 +1,23 @@
+microcorrugated:
+  name: Микрогофрокартон
+  slug: microcorrugated-cardboard
+  summary: Лёгкий и прочный материал для коробок.
+  description: Подходит для небольших товаров и доставки.
+  use_cases: Свечи, косметика, посуда
+  strength_score: 4
+  print_score: 4
+  eco_score: 4
+  cost_score: 3
+  price_factor: 1.000
+
+craft_cardboard:
+  name: Крафт-картон
+  slug: craft-cardboard
+  summary: Натуральный материал для лаконичной упаковки.
+  description: Хорошо подходит брендам с экологичным позиционированием.
+  use_cases: Косметика, подарки, одежда
+  strength_score: 3
+  print_score: 3
+  eco_score: 5
+  cost_score: 4
+  price_factor: 0.900
