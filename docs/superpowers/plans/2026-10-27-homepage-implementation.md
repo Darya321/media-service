@@ -1,5 +1,7 @@
 # Упаковано Homepage Implementation Plan
 
+> **Статус:** не исполнять как самостоятельный план. Документ относится к раннему прототипу без базы данных и административной панели. Он сохранён для истории; новый поэтапный план будет подготовлен после утверждения `docs/superpowers/specs/2026-10-27-upakovano-mvp-design.md`.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Создать в существующем Rails-приложении адаптивную главную страницу «Упаковано», визуально соответствующую макету и демонстрирующую работу калькулятора, фильтров поставщиков и основных действий без сохранения данных.
