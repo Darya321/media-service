@@ -1,0 +1,9 @@
+materials:
+  name: Материалы
+  slug: materials
+  description: Как выбрать материал упаковки.
+
+production:
+  name: Производство
+  slug: production
+  description: Процессы производства и печати.

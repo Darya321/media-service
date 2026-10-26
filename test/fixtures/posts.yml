@@ -1,0 +1,47 @@
+published_article:
+  category: materials
+  title: Как выбрать картон
+  slug: how-to-choose-cardboard
+  summary: Короткий ориентир по видам картона.
+  body: Основной текст опубликованной статьи.
+  kind: 0
+  status: 1
+  published_at: <%= 1.day.ago.to_fs(:db) %>
+  featured: true
+  cover_asset: cardboard-guide.svg
+
+published_without_date:
+  category: production
+  title: Подготовка макета
+  slug: print-layout
+  summary: Что проверить перед передачей макета.
+  body: Основной текст инструкции.
+  kind: 1
+  status: 1
+  published_at:
+  featured: false
+  cover_asset:
+
+draft_article:
+  category: materials
+  title: Черновик обзора
+  slug: draft-review
+  summary: Этот материал ещё не опубликован.
+  body: Текст черновика.
+  kind: 2
+  status: 0
+  published_at:
+  featured: false
+  cover_asset:
+
+future_article:
+  category: production
+  title: Будущая новость
+  slug: future-news
+  summary: Материал запланирован на будущее.
+  body: Текст будущей публикации.
+  kind: 4
+  status: 1
+  published_at: <%= 2.days.from_now.to_fs(:db) %>
+  featured: false
+  cover_asset:
