@@ -1,0 +1,32 @@
+<%= render "admin/shared/form_errors", record: supplier %>
+<%= form_with model: [:admin, supplier], class: "admin-form" do |form| %>
+  <div class="admin-form__grid">
+    <div class="field"><%= form.label :name, "Название" %><%= form.text_field :name, required: true %></div>
+    <div class="field"><%= form.label :slug, "Адрес страницы" %><%= form.text_field :slug, required: true, placeholder: "paper-lab" %></div>
+    <div class="field"><%= form.label :company_type, "Тип компании" %><%= form.select :company_type, admin_supplier_type_options %></div>
+    <div class="field"><%= form.label :specialization, "Специализация" %><%= form.text_field :specialization, required: true %></div>
+  </div>
+  <div class="field"><%= form.label :description, "Описание" %><%= form.text_area :description, rows: 6, required: true %></div>
+  <div class="admin-form__grid">
+    <div class="field"><%= form.label :minimum_order, "Минимальный тираж" %><%= form.number_field :minimum_order, min: 0, required: true %></div>
+    <div class="field"><%= form.label :unit_price_from, "Цена от" %><%= form.number_field :unit_price_from, min: 0, step: 0.01, required: true %></div>
+  </div>
+  <div class="admin-form__grid">
+    <div class="field"><%= label_tag "supplier_regions_text", "Регионы" %><%= text_area_tag "supplier[regions_text]", supplier.regions.join("\n"), id: "supplier_regions_text", rows: 5, required: true %><small>Через запятую или с новой строки.</small></div>
+    <div class="field"><%= label_tag "supplier_services_text", "Услуги" %><%= text_area_tag "supplier[services_text]", supplier.services.join("\n"), id: "supplier_services_text", rows: 5, required: true %><small>Через запятую или с новой строки.</small></div>
+  </div>
+  <fieldset class="admin-fieldset"><legend>Материалы</legend>
+    <%= form.collection_check_boxes :material_ids, @materials, :id, :name do |item| %>
+      <%= item.label(class: "check-field") { item.check_box + item.text } %>
+    <% end %>
+  </fieldset>
+  <div class="admin-form__grid">
+    <div class="field"><%= form.label :contact_email, "Контактный email" %><%= form.email_field :contact_email %></div>
+    <div class="field"><%= form.label :contact_url, "Сайт" %><%= form.url_field :contact_url %></div>
+  </div>
+  <div class="admin-checks">
+    <label class="check-field"><%= form.check_box :active %> Активен</label>
+    <label class="check-field"><%= form.check_box :promoted %> Продвижение</label>
+  </div>
+  <%= form.submit supplier.persisted? ? "Сохранить поставщика" : "Создать поставщика", class: "button button--accent" %>
+<% end %>

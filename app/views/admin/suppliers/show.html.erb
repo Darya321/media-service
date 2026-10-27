@@ -1,0 +1,22 @@
+<% content_for :title, "#{@supplier.name} — Упаковано" %>
+<section class="admin-heading">
+  <p class="eyebrow"><%= admin_supplier_type_label(@supplier) %></p><h1><%= @supplier.name %></h1>
+  <p><%= @supplier.specialization %></p>
+  <div class="admin-meta"><span class="badge"><%= @supplier.active? ? "Активен" : "Скрыт" %></span><% if @supplier.promoted? %><span class="badge">Продвижение</span><% end %></div>
+</section>
+<div class="admin-actions">
+  <%= link_to "Редактировать", edit_admin_supplier_path(@supplier), class: "button button--accent" %>
+  <% if @supplier.active? %><%= link_to "Открыть на сайте", supplier_path(@supplier), class: "button button--outline" %><% end %>
+  <%= button_to "Удалить поставщика", admin_supplier_path(@supplier), method: :delete, class: "button button--danger", form: { data: { turbo_confirm: "Удалить поставщика?" } } %>
+</div>
+<section class="admin-panel admin-detail-grid">
+  <div><h2>Описание</h2><%= simple_format @supplier.description %></div>
+  <dl>
+    <dt>Материалы</dt><dd><%= @supplier.materials.map(&:name).join(", ") %></dd>
+    <dt>Регионы</dt><dd><%= @supplier.regions.join(", ") %></dd>
+    <dt>Услуги</dt><dd><%= @supplier.services.join(", ") %></dd>
+    <dt>Минимальный тираж</dt><dd><%= @supplier.minimum_order %></dd>
+    <dt>Цена от</dt><dd><%= @supplier.unit_price_from %> ₽</dd>
+    <dt>Email</dt><dd><%= @supplier.contact_email.presence || "—" %></dd>
+  </dl>
+</section>

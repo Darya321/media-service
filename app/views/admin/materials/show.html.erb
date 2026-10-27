@@ -1,0 +1,25 @@
+<% content_for :title, "#{@material.name} — Упаковано" %>
+<section class="admin-heading">
+  <p class="eyebrow">Материал</p><h1><%= @material.name %></h1>
+  <p><%= @material.summary %></p><p><code>/<%= @material.slug %></code></p>
+</section>
+<div class="admin-actions">
+  <%= link_to "Редактировать", edit_admin_material_path(@material), class: "button button--accent" %>
+  <%= link_to "Открыть на сайте", material_path(@material), class: "button button--outline" %>
+  <% if @material.inquiries.empty? %>
+    <%= button_to "Удалить материал", admin_material_path(@material), method: :delete, class: "button button--danger", form: { data: { turbo_confirm: "Удалить материал?" } } %>
+  <% else %>
+    <p class="admin-hint">Материал используется в заявках и защищён от удаления.</p>
+  <% end %>
+</div>
+<section class="admin-panel admin-detail-grid">
+  <div><h2>Описание</h2><%= simple_format @material.description %></div>
+  <dl>
+    <dt>Применение</dt><dd><%= @material.use_cases %></dd>
+    <dt>Прочность</dt><dd><%= @material.strength_score %> / 5</dd>
+    <dt>Печать</dt><dd><%= @material.print_score %> / 5</dd>
+    <dt>Экологичность</dt><dd><%= @material.eco_score %> / 5</dd>
+    <dt>Доступность цены</dt><dd><%= @material.cost_score %> / 5</dd>
+    <dt>Коэффициент цены</dt><dd><%= @material.price_factor %></dd>
+  </dl>
+</section>

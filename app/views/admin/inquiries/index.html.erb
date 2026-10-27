@@ -1,0 +1,10 @@
+<% content_for :title, "Заявки — Упаковано" %>
+<section class="admin-heading"><p class="eyebrow">Обращения</p><h1>Заявки</h1></section>
+<section class="admin-panel"><div class="admin-table-wrap"><table class="admin-table">
+  <thead><tr><th>Email</th><th>Товар</th><th>Компания</th><th>Сумма</th><th>Статус</th><th></th></tr></thead>
+  <tbody><% @inquiries.each do |inquiry| %><tr>
+    <td><%= inquiry.email %></td><td><%= inquiry.product_type %></td><td><%= inquiry.supplier&.name || "Общая заявка" %></td>
+    <td><%= number_to_currency(inquiry.estimated_total_price, unit: "₽", format: "%n %u", precision: 0) %></td>
+    <td><span class="badge"><%= admin_inquiry_status_label(inquiry) %></span></td><td><%= link_to "Открыть", admin_inquiry_path(inquiry), class: "text-link" %></td>
+  </tr><% end %></tbody>
+</table></div></section>

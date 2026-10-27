@@ -1,0 +1,27 @@
+<% content_for :title, "Заявка #{@inquiry.id} — Упаковано" %>
+<section class="admin-heading">
+  <p class="eyebrow"><%= @inquiry.supplier ? "Заявка поставщику" : "Общая заявка" %></p>
+  <h1>Заявка №<%= @inquiry.id %></h1><p><%= @inquiry.email %> · <%= l @inquiry.created_at, format: :short %></p>
+</section>
+
+<%= render "admin/shared/form_errors", record: @inquiry %>
+<section class="admin-panel admin-status-form">
+  <%= form_with model: [:admin, @inquiry], class: "admin-form__inline" do |form| %>
+    <div class="field"><%= form.label :status, "Статус заявки" %><%= form.select :status, admin_inquiry_status_options %></div>
+    <%= form.submit "Сохранить статус", class: "button button--accent" %>
+  <% end %>
+</section>
+
+<section class="admin-detail-grid admin-detail-grid--cards">
+  <article class="admin-panel"><h2>Запрос</h2><dl>
+    <dt>Товар</dt><dd><%= @inquiry.product_type %></dd><dt>Материал</dt><dd><%= @inquiry.material.name %></dd>
+    <dt>Размеры</dt><dd><%= @inquiry.length_mm %> × <%= @inquiry.width_mm %> × <%= @inquiry.height_mm %> мм</dd>
+    <dt>Тираж</dt><dd><%= @inquiry.quantity %></dd><dt>Регион</dt><dd><%= @inquiry.region %></dd>
+    <dt>Поставщик</dt><dd><%= @inquiry.supplier&.name || "Не выбран" %></dd>
+  </dl></article>
+  <article class="admin-panel"><h2>Предварительный расчёт</h2><dl>
+    <dt>За штуку</dt><dd><%= number_to_currency(@inquiry.estimated_unit_price, unit: "₽", format: "%n %u") %></dd>
+    <dt>Всего</dt><dd><%= number_to_currency(@inquiry.estimated_total_price, unit: "₽", format: "%n %u", precision: 0) %></dd>
+    <dt>Диапазон</dt><dd><%= number_to_currency(@inquiry.estimated_low_price, unit: "₽", format: "%n %u", precision: 0) %> — <%= number_to_currency(@inquiry.estimated_high_price, unit: "₽", format: "%n %u", precision: 0) %></dd>
+  </dl><p class="admin-hint">Расчёт сохранён при отправке заявки и не редактируется из панели.</p></article>
+</section>

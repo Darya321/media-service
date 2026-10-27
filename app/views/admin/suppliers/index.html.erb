@@ -1,0 +1,15 @@
+<% content_for :title, "Поставщики — Упаковано" %>
+<section class="admin-heading admin-heading--row">
+  <div><p class="eyebrow">Каталог</p><h1>Поставщики</h1></div>
+  <%= link_to "Добавить поставщика", new_admin_supplier_path, class: "button button--accent" %>
+</section>
+<section class="admin-panel"><div class="admin-table-wrap"><table class="admin-table">
+  <thead><tr><th>Компания</th><th>Тип</th><th>Материалы</th><th>Состояние</th><th></th></tr></thead>
+  <tbody><% @suppliers.each do |supplier| %><tr>
+    <td><strong><%= supplier.name %></strong><% if supplier.promoted? %> <span class="badge">Продвижение</span><% end %></td>
+    <td><%= admin_supplier_type_label(supplier) %></td>
+    <td><%= supplier.materials.map(&:name).join(", ") %></td>
+    <td><%= supplier.active? ? "Активен" : "Скрыт" %></td>
+    <td><%= link_to "Открыть", admin_supplier_path(supplier), class: "text-link" %></td>
+  </tr><% end %></tbody>
+</table></div></section>

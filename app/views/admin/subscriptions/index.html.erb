@@ -1,0 +1,6 @@
+<% content_for :title, "Подписки — Упаковано" %>
+<section class="admin-heading"><p class="eyebrow">Аудитория</p><h1>Подписки</h1><p>Учебный локальный список — письма автоматически не отправляются.</p></section>
+<section class="admin-panel"><div class="admin-table-wrap"><table class="admin-table">
+  <thead><tr><th>Email</th><th>Дата</th></tr></thead>
+  <tbody><% @subscriptions.each do |subscription| %><tr><td><%= subscription.email %></td><td><%= l subscription.created_at, format: :short %></td></tr><% end %></tbody>
+</table></div></section>

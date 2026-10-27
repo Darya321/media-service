@@ -1,0 +1,15 @@
+<% content_for :title, "Материалы — Упаковано" %>
+<section class="admin-heading admin-heading--row">
+  <div><p class="eyebrow">Каталог</p><h1>Материалы</h1></div>
+  <%= link_to "Добавить материал", new_admin_material_path, class: "button button--accent" %>
+</section>
+<section class="admin-card-grid">
+  <% @materials.each do |material| %>
+    <article class="admin-record-card">
+      <p class="eyebrow"><%= material.use_cases %></p>
+      <h2><%= material.name %></h2>
+      <p><%= material.summary %></p>
+      <%= link_to "Открыть", admin_material_path(material), class: "text-link" %>
+    </article>
+  <% end %>
+</section>

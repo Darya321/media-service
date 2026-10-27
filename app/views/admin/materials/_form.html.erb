@@ -1,0 +1,18 @@
+<%= render "admin/shared/form_errors", record: material %>
+<%= form_with model: [:admin, material], class: "admin-form" do |form| %>
+  <div class="admin-form__grid">
+    <div class="field"><%= form.label :name, "Название" %><%= form.text_field :name, required: true %></div>
+    <div class="field"><%= form.label :slug, "Адрес страницы" %><%= form.text_field :slug, required: true, placeholder: "craft-cardboard" %></div>
+  </div>
+  <div class="field"><%= form.label :summary, "Краткое описание" %><%= form.text_area :summary, rows: 3, required: true %></div>
+  <div class="field"><%= form.label :description, "Подробное описание" %><%= form.text_area :description, rows: 7, required: true %></div>
+  <div class="field"><%= form.label :use_cases, "Применение" %><%= form.text_field :use_cases, required: true %></div>
+  <div class="admin-form__grid admin-form__grid--scores">
+    <div class="field"><%= form.label :strength_score, "Прочность" %><%= form.number_field :strength_score, in: 1..5, required: true %></div>
+    <div class="field"><%= form.label :print_score, "Печать" %><%= form.number_field :print_score, in: 1..5, required: true %></div>
+    <div class="field"><%= form.label :eco_score, "Экологичность" %><%= form.number_field :eco_score, in: 1..5, required: true %></div>
+    <div class="field"><%= form.label :cost_score, "Доступность цены" %><%= form.number_field :cost_score, in: 1..5, required: true %></div>
+    <div class="field"><%= form.label :price_factor, "Коэффициент цены" %><%= form.number_field :price_factor, min: 0.001, step: 0.001, required: true %></div>
+  </div>
+  <%= form.submit material.persisted? ? "Сохранить материал" : "Создать материал", class: "button button--accent" %>
+<% end %>
