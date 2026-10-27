@@ -1802,10 +1802,197 @@
   color: var(--color-muted);
 }
 
-.about-principles {
-  margin-block: var(--space-6);
-  padding: var(--space-5);
+.about-page {
+  padding-top: clamp(3rem, 7vw, 7rem);
+}
+
+.about-hero {
+  display: grid;
+  min-height: 34rem;
+  padding-bottom: clamp(3rem, 7vw, 7rem);
+  grid-template-columns: minmax(0, 1.45fr) minmax(18rem, 0.55fr);
+  align-items: end;
+  gap: clamp(3rem, 8vw, 9rem);
+  border-bottom: 1px solid var(--color-ink);
+}
+
+.about-hero h1 {
+  max-width: 13ch;
+  margin: 0;
+  font-size: clamp(3.8rem, 7.7vw, 8rem);
+  letter-spacing: -0.068em;
+  line-height: 0.9;
+}
+
+.about-hero__statement {
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-ink);
+}
+
+.about-hero__statement span {
+  color: var(--color-muted);
+  font-size: var(--text-small);
+}
+
+.about-hero__statement p {
+  margin: var(--space-5) 0 0;
+  font-size: var(--text-lead);
+}
+
+.about-capabilities {
+  padding-block: clamp(4rem, 9vw, 9rem);
+}
+
+.about-section-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(18rem, 0.55fr);
+  align-items: end;
+  gap: var(--space-7);
+}
+
+.about-section-heading h2 {
+  margin: 0;
+  font-size: clamp(2.6rem, 5vw, 5.2rem);
+  letter-spacing: -0.055em;
+  line-height: 0.94;
+}
+
+.about-section-heading > p {
+  margin: 0;
+  color: var(--color-muted);
+}
+
+.about-capabilities__grid {
+  display: grid;
+  margin-top: var(--space-8);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-block: 1px solid var(--color-ink);
+}
+
+.about-capabilities__grid article {
+  min-height: 22rem;
+  padding: var(--space-6);
+  border-left: 1px solid var(--color-line);
+}
+
+.about-capabilities__grid article:first-child {
+  border-left: 0;
+}
+
+.about-capabilities__grid article:last-child {
+  background: var(--color-accent);
+}
+
+.about-capabilities__grid span {
+  display: block;
+  font-size: clamp(2rem, 3vw, 3.5rem);
+  font-weight: var(--font-weight-medium);
+}
+
+.about-capabilities__grid h3 {
+  margin: clamp(5rem, 9vw, 9rem) 0 var(--space-3);
+  font-size: clamp(1.4rem, 2vw, 2rem);
+  letter-spacing: -0.035em;
+}
+
+.about-capabilities__grid p {
+  margin: 0;
+  color: var(--color-muted);
+}
+
+.about-capabilities__grid article:last-child p {
+  color: var(--color-ink);
+}
+
+.about-manifesto {
+  padding-block: clamp(4rem, 9vw, 9rem);
+  background: var(--color-forest);
+  color: var(--color-white);
+}
+
+.about-manifesto .eyebrow {
+  color: var(--color-accent-soft);
+}
+
+.about-manifesto__text {
+  max-width: 17ch;
+  margin: var(--space-7) 0 0;
+  font-size: clamp(3rem, 6.8vw, 7.2rem);
+  letter-spacing: -0.062em;
+  line-height: 0.92;
+}
+
+.about-audiences {
+  display: grid;
+  padding-block: clamp(4rem, 9vw, 9rem);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-5);
+}
+
+.about-audiences article {
+  display: flex;
+  min-height: 30rem;
+  padding: clamp(2rem, 4vw, 4rem);
+  align-items: flex-start;
+  flex-direction: column;
+  border: 1px solid var(--color-ink);
+  border-radius: var(--radius-control);
+  background: var(--color-paper);
+}
+
+.about-audiences article:first-child {
   background: var(--color-accent-soft);
+}
+
+.about-audiences h2 {
+  max-width: 15ch;
+  margin: 0 0 var(--space-5);
+  font-size: clamp(2.2rem, 4vw, 4rem);
+  letter-spacing: -0.052em;
+  line-height: 0.95;
+}
+
+.about-audiences article > p:not(.eyebrow) {
+  max-width: 37rem;
+  margin: 0 0 var(--space-7);
+  color: var(--color-muted);
+  font-size: var(--text-lead);
+}
+
+.about-audiences .button {
+  margin-top: auto;
+}
+
+.about-principles {
+  display: grid;
+  margin-bottom: clamp(4rem, 9vw, 9rem);
+  padding: clamp(2rem, 5vw, 5rem);
+  grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr);
+  gap: var(--space-7);
+  border: 1px solid var(--color-ink);
+  border-radius: var(--radius-control);
+  background: var(--color-accent);
+}
+
+.about-principles h2 {
+  max-width: 12ch;
+  margin: 0;
+  font-size: clamp(2.2rem, 4vw, 4rem);
+  letter-spacing: -0.052em;
+  line-height: 0.95;
+}
+
+.about-principles > div:last-child {
+  max-width: 43rem;
+  font-size: var(--text-lead);
+}
+
+.about-principles > div:last-child p:first-child {
+  margin-top: 0;
+}
+
+.about-principles > div:last-child p:last-child {
+  margin-bottom: 0;
 }
 
 .site-footer {

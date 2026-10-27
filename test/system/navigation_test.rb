@@ -7,12 +7,14 @@ class NavigationTest < ApplicationSystemTestCase
     assert_selector "header", text: "Упаковано"
     assert_link "О проекте", href: about_path
 
-    within("header") { click_link "О проекте" }
+    within(".site-header") { click_link "О проекте" }
 
     assert_current_path about_path
-    assert_selector "h1", text: "О проекте"
+    assert_selector ".about-hero h1", text: "Упаковано"
+    assert_selector ".about-capabilities [data-capability]", count: 4
+    assert_selector "#manufacturers[data-audience='manufacturers']"
 
-    within("header") { click_link "Упаковано" }
+    within(".site-header") { click_link "Упаковано" }
 
     assert_current_path root_path
   end

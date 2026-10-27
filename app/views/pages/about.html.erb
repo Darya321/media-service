@@ -1,19 +1,81 @@
 <% content_for :title, "О проекте — Упаковано" %>
 
-<article class="editorial-page container">
-  <p class="eyebrow">Учебный медиасервис</p>
-  <h1>О проекте</h1>
-  <div class="editorial-page__body">
-    <p>«Упаковано» помогает малому бизнесу разобраться в материалах, предварительно оценить стоимость и найти поставщиков упаковки.</p>
-    <p>Проект объединяет справочник материалов, понятные публикации, предварительный калькулятор и единый формат сравнения компаний.</p>
-    <div class="about-principles card">
-      <h2>Что важно знать</h2>
-      <p>Все расчёты предварительные. Заявки и подписки учебные: они сохраняются внутри проекта и не отправляются реальным компаниям.</p>
+<article class="about-page">
+  <header class="about-hero container">
+    <div class="about-hero__intro">
+      <p class="eyebrow">О проекте</p>
+      <h1>«Упаковано» помогает выбирать упаковку осознанно</h1>
     </div>
-    <section id="manufacturers">
-      <h2>Для производителей</h2>
-      <p>Карточки поставщиков показывают, как услуги, регионы и минимальный тираж можно представить в одном формате.</p>
-    </section>
-    <%= link_to "Перейти к расчёту", calculator_path, class: "button button--accent" %>
-  </div>
+    <div class="about-hero__statement">
+      <span aria-hidden="true">01 / 04</span>
+      <p>Один сервис объединяет знания о материалах, предварительный расчёт и сравнение производителей — без лишней отраслевой сложности.</p>
+    </div>
+  </header>
+
+  <section class="about-capabilities container" aria-labelledby="about-capabilities-title">
+    <header class="about-section-heading">
+      <div>
+        <p class="eyebrow">Что внутри</p>
+        <h2 id="about-capabilities-title">От первого вопроса<br>до запроса поставщику</h2>
+      </div>
+      <p>Четыре связанных инструмента помогают пройти путь последовательно и сравнивать варианты по одинаковым критериям.</p>
+    </header>
+
+    <div class="about-capabilities__grid">
+      <article data-capability="media">
+        <span>01</span>
+        <h3>Разобраться</h3>
+        <p>Статьи объясняют свойства материалов, способы печати и требования к упаковке.</p>
+      </article>
+      <article data-capability="calculator">
+        <span>02</span>
+        <h3>Рассчитать</h3>
+        <p>Калькулятор показывает предварительный ориентир для выбранного товара и тиража.</p>
+      </article>
+      <article data-capability="materials">
+        <span>03</span>
+        <h3>Сравнить</h3>
+        <p>Справочник собирает ключевые свойства материалов в одном понятном формате.</p>
+      </article>
+      <article data-capability="suppliers">
+        <span>04</span>
+        <h3>Выбрать</h3>
+        <p>Каталог помогает сопоставить специализацию, минимальный тираж и регионы работы компаний.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="about-manifesto">
+    <div class="container">
+      <p class="eyebrow">Наш принцип</p>
+      <p class="about-manifesto__text">Упаковка — это не финальная декорация, а часть продукта, его стоимости и впечатления от бренда.</p>
+    </div>
+  </section>
+
+  <section class="about-audiences container" aria-label="Для кого создан проект">
+    <article data-audience="business">
+      <p class="eyebrow">Для малого бизнеса</p>
+      <h2>Меньше неизвестных перед первым заказом</h2>
+      <p>Сервис помогает подготовить исходные данные, оценить порядок стоимости и сформулировать предметный запрос производителю.</p>
+      <%= link_to "Перейти к расчёту", calculator_path, class: "button button--accent" %>
+    </article>
+
+    <article id="manufacturers" data-audience="manufacturers">
+      <p class="eyebrow">Для производителей</p>
+      <h2>Понятное представление услуг и возможностей</h2>
+      <p>Единый формат карточек показывает специализацию, материалы, регионы и минимальный тираж без несопоставимых рекламных обещаний.</p>
+      <%= link_to "Читать материалы", posts_path, class: "button" %>
+    </article>
+  </section>
+
+  <section class="about-principles container" aria-labelledby="about-principles-title">
+    <div>
+      <p class="eyebrow">Важно знать</p>
+      <h2 id="about-principles-title">Честно о формате проекта</h2>
+    </div>
+    <div>
+      <p>«Упаковано» — учебный медиасервис. Расчёты носят предварительный характер и не являются коммерческим предложением.</p>
+      <p>Заявки и подписки сохраняются только внутри проекта и не отправляются реальным компаниям.</p>
+    </div>
+  </section>
 </article>
