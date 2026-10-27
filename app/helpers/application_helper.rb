@@ -23,6 +23,12 @@ module ApplicationHelper
     "business-cases" => "figma/material-craft-cardboard.jpeg",
     "legislation" => "figma/material-paper.png"
   }.freeze
+  HOME_MEDIA_ASSETS = {
+    "materials" => "editorial/media-material-guide-v2.png",
+    "suppliers" => "editorial/media-maker-story-v2.png",
+    "business-cases" => "editorial/media-cardboard-review-v2.png",
+    "legislation" => "editorial/media-cardboard-review-v2.png"
+  }.freeze
   RUSSIAN_MONTHS = %w[
     января февраля марта апреля мая июня
     июля августа сентября октября ноября декабря
@@ -49,6 +55,10 @@ module ApplicationHelper
 
   def post_cover_asset(post)
     POST_COVER_ASSETS[post.cover_asset] || POST_FALLBACK_ASSETS[post.category.slug]
+  end
+
+  def home_media_asset(post)
+    HOME_MEDIA_ASSETS.fetch(post.category.slug, "editorial/media-material-guide-v2.png")
   end
 
   def post_placement_label(post)

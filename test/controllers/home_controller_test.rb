@@ -11,6 +11,8 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
     assert_select "[data-home-post='how-to-choose-cardboard']", count: 1
     assert_select "[data-home-post='draft-review']", count: 0
     assert_select "[data-home-post='future-news']", count: 0
+    assert_select ".home-media-grid img.home-media-grid__image", count: 3
+    assert_select "[data-home-post='how-to-choose-cardboard'] img[alt='Иллюстрация к материалу «Как выбрать картон»']", count: 1
   end
 
   test "homepage sections follow the approved Figma order" do

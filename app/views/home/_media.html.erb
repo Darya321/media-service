@@ -6,7 +6,11 @@
   <div class="home-media-grid">
     <% posts.each do |post| %>
       <article data-home-post="<%= post.slug %>">
-        <div class="home-media-grid__cover home-media-grid__cover--<%= post.kind %>"></div>
+        <div class="home-media-grid__cover">
+          <%= image_tag home_media_asset(post),
+                        class: "home-media-grid__image",
+                        alt: "Иллюстрация к материалу «#{post.title}»" %>
+        </div>
         <p class="eyebrow"><%= post_kind_label(post.kind) %></p>
         <h3><%= link_to post.title, post_path(post) %></h3>
         <p><%= post.summary %></p>
