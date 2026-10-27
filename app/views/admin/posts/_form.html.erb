@@ -1,0 +1,46 @@
+<%= render "admin/shared/form_errors", record: post %>
+
+<%= form_with model: [:admin, post], class: "admin-form" do |form| %>
+  <div class="admin-form__grid">
+    <div class="field">
+      <%= form.label :category_id, "Категория" %>
+      <%= form.collection_select :category_id, @categories, :id, :name, { prompt: "Выберите категорию" }, required: true %>
+    </div>
+    <div class="field">
+      <%= form.label :kind, "Тип" %>
+      <%= form.select :kind, admin_post_kind_options %>
+    </div>
+    <div class="field">
+      <%= form.label :status, "Статус" %>
+      <%= form.select :status, admin_post_status_options %>
+    </div>
+    <div class="field">
+      <%= form.label :published_at, "Дата публикации" %>
+      <%= form.datetime_local_field :published_at %>
+    </div>
+  </div>
+  <div class="field">
+    <%= form.label :title, "Заголовок" %>
+    <%= form.text_field :title, required: true %>
+  </div>
+  <div class="field">
+    <%= form.label :slug, "Адрес страницы" %>
+    <%= form.text_field :slug, required: true, placeholder: "how-to-choose-cardboard" %>
+  </div>
+  <div class="field">
+    <%= form.label :summary, "Краткое описание" %>
+    <%= form.text_area :summary, rows: 3, required: true %>
+  </div>
+  <div class="field">
+    <%= form.label :body, "Текст" %>
+    <%= form.text_area :body, rows: 14, required: true %>
+  </div>
+  <div class="admin-form__grid">
+    <div class="field">
+      <%= form.label :cover_asset, "Файл обложки" %>
+      <%= form.text_field :cover_asset, placeholder: "cover.svg" %>
+    </div>
+    <label class="check-field"><%= form.check_box :featured %> Показывать как избранное</label>
+  </div>
+  <%= form.submit post.persisted? ? "Сохранить публикацию" : "Создать публикацию", class: "button button--accent" %>
+<% end %>

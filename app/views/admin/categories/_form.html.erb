@@ -1,0 +1,18 @@
+<%= render "admin/shared/form_errors", record: category %>
+
+<%= form_with model: [:admin, category], class: "admin-form" do |form| %>
+  <div class="field">
+    <%= form.label :name, "Название" %>
+    <%= form.text_field :name, required: true %>
+  </div>
+  <div class="field">
+    <%= form.label :slug, "Адрес страницы" %>
+    <%= form.text_field :slug, required: true, placeholder: "materials" %>
+    <small>Латиницей, без пробелов. После публикации лучше не менять.</small>
+  </div>
+  <div class="field">
+    <%= form.label :description, "Описание" %>
+    <%= form.text_area :description, rows: 5 %>
+  </div>
+  <%= form.submit category.persisted? ? "Сохранить категорию" : "Создать категорию", class: "button button--accent" %>
+<% end %>

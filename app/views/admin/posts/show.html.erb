@@ -1,0 +1,23 @@
+<% content_for :title, "#{@post.title} — Упаковано" %>
+
+<section class="admin-heading">
+  <p class="eyebrow"><%= admin_post_kind_label(@post) %> · <%= @post.category.name %></p>
+  <h1><%= @post.title %></h1>
+  <p><%= @post.summary %></p>
+  <div class="admin-meta">
+    <span class="badge"><%= admin_post_status_label(@post) %></span>
+    <code>/<%= @post.slug %></code>
+    <% if @post.published_at? %><span><%= l @post.published_at, format: :short %></span><% end %>
+  </div>
+</section>
+
+<div class="admin-actions">
+  <%= link_to "Редактировать", edit_admin_post_path(@post), class: "button button--accent" %>
+  <% if @post.published? %><%= link_to "Открыть на сайте", post_path(@post), class: "button button--outline" %><% end %>
+  <%= button_to "Удалить публикацию", admin_post_path(@post), method: :delete,
+    class: "button button--danger", form: { data: { turbo_confirm: "Удалить публикацию?" } } %>
+</div>
+
+<section class="admin-panel admin-prose">
+  <%= simple_format @post.body %>
+</section>

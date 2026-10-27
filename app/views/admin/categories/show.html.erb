@@ -1,0 +1,31 @@
+<% content_for :title, "#{@category.name} — Упаковано" %>
+
+<section class="admin-heading">
+  <p class="eyebrow">Категория</p>
+  <h1><%= @category.name %></h1>
+  <p><%= @category.description.presence || "Описание пока не добавлено." %></p>
+  <p><code>/<%= @category.slug %></code></p>
+</section>
+
+<div class="admin-actions">
+  <%= link_to "Редактировать", edit_admin_category_path(@category), class: "button button--accent" %>
+  <% if @category.posts.empty? %>
+    <%= button_to "Удалить категорию", admin_category_path(@category), method: :delete,
+      class: "button button--danger", form: { data: { turbo_confirm: "Удалить категорию?" } } %>
+  <% else %>
+    <p class="admin-hint">Удаление станет доступно после переноса или удаления публикаций.</p>
+  <% end %>
+</div>
+
+<section class="admin-panel">
+  <h2>Публикации в категории</h2>
+  <% if @category.posts.any? %>
+    <ul class="admin-record-list">
+      <% @category.posts.order(:title).each do |post| %>
+        <li><%= link_to post.title, admin_post_path(post) %> <span class="badge"><%= admin_post_status_label(post) %></span></li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>В этой категории пока нет публикаций.</p>
+  <% end %>
+</section>

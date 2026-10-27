@@ -1,0 +1,25 @@
+<% content_for :title, "Публикации — Упаковано" %>
+
+<section class="admin-heading admin-heading--row">
+  <div><p class="eyebrow">Редакция</p><h1>Публикации</h1></div>
+  <%= link_to "Добавить публикацию", new_admin_post_path, class: "button button--accent" %>
+</section>
+
+<section class="admin-panel">
+  <div class="admin-table-wrap">
+    <table class="admin-table">
+      <thead><tr><th>Заголовок</th><th>Категория</th><th>Тип</th><th>Статус</th><th></th></tr></thead>
+      <tbody>
+        <% @posts.each do |post| %>
+          <tr>
+            <td><strong><%= post.title %></strong></td>
+            <td><%= post.category.name %></td>
+            <td><%= admin_post_kind_label(post) %></td>
+            <td><span class="badge"><%= admin_post_status_label(post) %></span></td>
+            <td><%= link_to "Открыть", admin_post_path(post), class: "text-link" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</section>

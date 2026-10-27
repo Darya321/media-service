@@ -1,0 +1,27 @@
+<% content_for :title, "Категории — Упаковано" %>
+
+<section class="admin-heading admin-heading--row">
+  <div>
+    <p class="eyebrow">Редакция</p>
+    <h1>Категории</h1>
+  </div>
+  <%= link_to "Добавить категорию", new_admin_category_path, class: "button button--accent" %>
+</section>
+
+<section class="admin-panel">
+  <div class="admin-table-wrap">
+    <table class="admin-table">
+      <thead><tr><th>Название</th><th>Адрес</th><th>Публикаций</th><th></th></tr></thead>
+      <tbody>
+        <% @categories.each do |category| %>
+          <tr>
+            <td><strong><%= category.name %></strong></td>
+            <td><code><%= category.slug %></code></td>
+            <td><%= category.posts.size %></td>
+            <td><%= link_to "Открыть", admin_category_path(category), class: "text-link" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</section>
