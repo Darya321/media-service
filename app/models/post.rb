@@ -28,18 +28,20 @@ class Post < ApplicationRecord
   validates :title, :summary, :body, presence: true
   validates :supplier, presence: true, if: :partner?
   validates :external_url, presence: true, if: :external?
+  validate :partner_supplier_is_active, if: -> { partner? && supplier.present? }
   validate :external_url_uses_web_scheme, if: -> { external? && external_url.present? }
 
   scope :publicly_visible, -> {
     published.where("published_at IS NULL OR published_at <= ?", Time.current)
   }
   scope :promotable, -> {
-    where(
-      "(posts.placement = :partner AND posts.supplier_id IS NOT NULL) OR " \
+    left_outer_joins(:supplier).where(
+      "(posts.placement = :partner AND suppliers.active = :active) OR " \
         "(posts.placement = :external AND " \
         "(posts.external_url LIKE 'http://%' OR posts.external_url LIKE 'https://%'))",
       partner: placements.fetch(:partner),
-      external: placements.fetch(:external)
+      external: placements.fetch(:external),
+      active: true
     )
   }
   scope :search_for, ->(query) {
@@ -59,6 +61,10 @@ class Post < ApplicationRecord
   end
 
   private
+
+  def partner_supplier_is_active
+    errors.add(:supplier, "должен быть активен") unless supplier.active?
+  end
 
   def external_url_uses_web_scheme
     uri = URI.parse(external_url)

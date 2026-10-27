@@ -1,6 +1,9 @@
 <article class="media-hero" data-post-slug="<%= post.slug %>">
   <div class="media-hero__content">
     <p class="eyebrow">Медиа · <%= post.category.name %></p>
+    <% if (placement_label = post_placement_label(post)) %>
+      <span class="media-hero__placement"><%= placement_label %></span>
+    <% end %>
     <h1>Всё важное<br>о мире упаковки</h1>
     <p>Практические статьи, новости компаний, предложения для бизнеса и изменения требований.</p>
     <%= link_to post_path(post), class: "button button--accent" do %>

@@ -58,7 +58,7 @@ module ApplicationHelper
   end
 
   def post_cta_url(post)
-    return supplier_path(post.supplier) if post.partner? && post.supplier.present?
+    return supplier_path(post.supplier) if post.partner? && post.supplier&.active?
 
     post.external_url if post.external? && safe_external_url?(post.external_url)
   end

@@ -31,7 +31,7 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.publicly_visible.includes(:category).find_by!(slug: params[:slug])
+    @post = Post.publicly_visible.includes(:category, :supplier).find_by!(slug: params[:slug])
     @related_posts = Post.publicly_visible
       .where(category: @post.category)
       .where.not(id: @post.id)

@@ -749,6 +749,18 @@
   color: var(--color-accent-soft);
 }
 
+.media-hero__placement {
+  display: inline-flex;
+  margin: 0 0 var(--space-4);
+  padding: 0.65rem 1rem;
+  border: 1px solid rgb(255 255 255 / 36%);
+  border-radius: var(--radius-pill);
+  background: rgb(255 255 255 / 12%);
+  color: var(--color-white);
+  font-size: var(--text-small);
+  font-weight: 700;
+}
+
 .media-hero__content h1 {
   margin: 0 0 var(--space-5);
   max-width: 10ch;

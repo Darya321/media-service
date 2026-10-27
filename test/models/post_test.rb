@@ -34,6 +34,13 @@ class PostTest < ActiveSupport::TestCase
     assert post.valid?
   end
 
+  test "partner post requires an active supplier" do
+    post = build_post(placement: :partner, supplier: suppliers(:inactive_studio))
+
+    refute post.valid?
+    assert post.errors[:supplier].any?
+  end
+
   test "external placement requires a safe absolute web url" do
     post = build_post(placement: :external)
 

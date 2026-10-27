@@ -76,7 +76,8 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
 
     assert_select ".media-section[data-section='suppliers'] [data-post-slug='partner-box-line']" do
       assert_select ".media-card__sponsor", text: "Партнёрский материал"
-      assert_select ".media-card__date", text: /\d{1,2} октября 2026/
+      assert_select ".media-card__date",
+        text: /\d{1,2} (?:января|февраля|марта|апреля|мая|июня|июля|августа|сентября|октября|ноября|декабря) \d{4}/
     end
     assert_select ".media-promotion[data-post-slug='marketplace-packaging-service']"
     assert_select ".media-section[data-section='legislation'] [data-post-slug='packaging-labeling-rules']"
@@ -118,6 +119,31 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
 
     assert_select ".publication__partner", count: 0
     assert_select "a[href^='javascript:']", count: 0
+  end
+
+  test "inactive supplier does not produce a broken partner call to action" do
+    post = posts(:partner_article)
+    post.supplier.update!(active: false)
+
+    get post_path(post)
+
+    assert_response :success
+    assert_select ".publication__partner", count: 0
+
+    post.update_columns(category_id: categories(:business_cases).id, published_at: Time.current)
+    get posts_path
+
+    assert_select ".media-promotion[data-post-slug='#{post.slug}']", count: 0
+  end
+
+  test "featured partner material is clearly labeled in the hero" do
+    post = posts(:partner_article)
+    post.update!(featured: true, published_at: Time.current)
+
+    get posts_path
+
+    assert_select ".media-hero[data-post-slug='#{post.slug}'] .media-hero__placement",
+      text: "Партнёрский материал"
   end
 
   test "index filters by category slug" do
