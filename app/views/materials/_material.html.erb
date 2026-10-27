@@ -1,0 +1,14 @@
+<article class="material-card" data-material-slug="<%= material.slug %>">
+  <%= image_tag material_asset(material), class: "material-card__image", alt: "Образец материала #{material.name}" %>
+  <div class="material-card__body">
+    <h2><%= link_to material.name, material_path(material) %></h2>
+    <p><%= material.summary %></p>
+    <div class="material-card__scores">
+      <%= render "score", label: "Прочность", score: material.strength_score %>
+      <%= render "score", label: "Печать", score: material.print_score %>
+      <%= render "score", label: "Экологичность", score: material.eco_score %>
+      <%= render "score", label: "Стоимость", score: material.cost_score %>
+    </div>
+    <%= link_to "Рассчитать с этим материалом", calculator_path(material_slug: material.slug), class: "button material-card__action" %>
+  </div>
+</article>

@@ -1,0 +1,31 @@
+<% content_for :title, "Материалы упаковки — Упаковано" %>
+
+<section class="materials-page container">
+  <header class="materials-page__header">
+    <p class="eyebrow">Материалы упаковки</p>
+    <h1>Из чего делают упаковку и что выбрать именно вам</h1>
+    <p>Шесть популярных материалов для малого бизнеса: чем отличаются, для каких товаров подходят и сколько примерно стоят относительно друг друга.</p>
+  </header>
+
+  <div class="material-filters">
+    <%= link_to "Все", materials_path, class: "#{"is-active" if params[:use_case].blank?}" %>
+    <% [ "свечи", "косметика", "доставка", "подарки", "продукты" ].each do |use_case| %>
+      <%= link_to use_case.capitalize, materials_path(use_case: use_case), class: "#{"is-active" if params[:use_case]&.casecmp?(use_case)}" %>
+    <% end %>
+    <%= form_with url: materials_path, method: :get, class: "material-search", data: { turbo: false } do %>
+      <%= label_tag :use_case, "Назначение", class: "visually-hidden" %>
+      <%= search_field_tag :use_case, params[:use_case], placeholder: "Например, посуда" %>
+      <%= submit_tag "Найти", class: "button button--dark" %>
+    <% end %>
+  </div>
+
+  <% if @materials.any? %>
+    <div class="material-grid"><%= render @materials %></div>
+  <% else %>
+    <div class="empty-state card">
+      <h2>Материалы не нашли</h2>
+      <p>Попробуйте другое назначение или посмотрите весь каталог.</p>
+      <%= link_to "Все материалы", materials_path, class: "button button--dark" %>
+    </div>
+  <% end %>
+</section>

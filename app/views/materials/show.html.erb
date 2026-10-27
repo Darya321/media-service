@@ -1,0 +1,37 @@
+<% content_for :title, "#{@material.name} — материалы Упаковано" %>
+
+<article class="material-detail container" data-material-slug="<%= @material.slug %>">
+  <%= link_to "← Все материалы", materials_path, class: "back-link" %>
+  <div class="material-detail__hero">
+    <%= image_tag material_asset(@material), class: "material-detail__image", alt: "Образец материала #{@material.name}" %>
+    <header>
+      <p class="eyebrow">Материал упаковки</p>
+      <h1><%= @material.name %></h1>
+      <p class="material-detail__lead"><%= @material.summary %></p>
+      <p><%= @material.description %></p>
+      <p><strong>Подходит для:</strong> <%= @material.use_cases %></p>
+    </header>
+  </div>
+
+  <div class="material-detail__content">
+    <section class="card material-detail__scores">
+      <h2>Сравнительные характеристики</h2>
+      <%= render "score", label: "Прочность", score: @material.strength_score %>
+      <%= render "score", label: "Печать", score: @material.print_score %>
+      <%= render "score", label: "Экологичность", score: @material.eco_score %>
+      <%= render "score", label: "Стоимость", score: @material.cost_score %>
+      <p class="material-disclaimer">Оценки — ориентир для первого сравнения, а не отраслевой стандарт.</p>
+    </section>
+
+    <section class="card material-detail__suppliers">
+      <h2>Кто работает с материалом</h2>
+      <% if @suppliers.any? %>
+        <ul><% @suppliers.each do |supplier| %><li><%= link_to supplier.name, supplier_path(supplier) %></li><% end %></ul>
+      <% else %>
+        <p>Активные поставщики пока не добавлены.</p>
+      <% end %>
+      <%= link_to "Найти поставщиков", suppliers_path(material: @material.slug), class: "button button--dark" %>
+      <%= link_to "Рассчитать с этим материалом", calculator_path(material_slug: @material.slug), class: "button button--accent" %>
+    </section>
+  </div>
+</article>
