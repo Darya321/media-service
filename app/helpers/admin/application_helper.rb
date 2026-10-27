@@ -12,6 +12,12 @@ module Admin::ApplicationHelper
     "published" => "Опубликовано"
   }.freeze
 
+  POST_PLACEMENT_LABELS = {
+    "editorial" => "Редакционный материал",
+    "partner" => "Партнёрский материал",
+    "external" => "Внешняя реклама"
+  }.freeze
+
   SUPPLIER_TYPE_LABELS = {
     "factory" => "Фабрика",
     "box_supplier" => "Поставщик коробок",
@@ -39,12 +45,20 @@ module Admin::ApplicationHelper
     POST_STATUS_LABELS.map { |value, label| [ label, value ] }
   end
 
+  def admin_post_placement_options
+    POST_PLACEMENT_LABELS.map { |value, label| [ label, value ] }
+  end
+
   def admin_post_kind_label(post)
     POST_KIND_LABELS.fetch(post.kind)
   end
 
   def admin_post_status_label(post)
     POST_STATUS_LABELS.fetch(post.status)
+  end
+
+  def admin_post_placement_label(post)
+    POST_PLACEMENT_LABELS.fetch(post.placement)
   end
 
   def admin_supplier_type_options

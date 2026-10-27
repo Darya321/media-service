@@ -24,6 +24,9 @@ class AdminEditorialCrudTest < ApplicationSystemTestCase
     fill_in "Текст", with: "Проверьте размеры, материал и макет перед заказом."
     select "Инструкция", from: "Тип"
     select "Черновик", from: "Статус"
+    select "Партнёрский материал", from: "Размещение"
+    select "Крафт упаковка", from: "Компания"
+    fill_in "Текст кнопки", with: "Открыть компанию"
     click_button "Создать публикацию"
     assert_text "Как подготовить тираж"
     assert_text "Черновик"
@@ -35,6 +38,8 @@ class AdminEditorialCrudTest < ApplicationSystemTestCase
     post_record = Post.find_by!(title: "Как подготовить тираж")
     visit post_path(post_record)
     assert_text "Как подготовить тираж"
+    assert_text "Партнёрский материал"
+    assert_link "Открыть компанию", href: supplier_path(suppliers(:kraft_factory))
 
     visit admin_post_path(post_record)
     click_button "Удалить публикацию"

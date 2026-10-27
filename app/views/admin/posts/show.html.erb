@@ -6,6 +6,8 @@
   <p><%= @post.summary %></p>
   <div class="admin-meta">
     <span class="badge"><%= admin_post_status_label(@post) %></span>
+    <span class="badge"><%= admin_post_placement_label(@post) %></span>
+    <% if @post.supplier %><span><%= @post.supplier.name %></span><% end %>
     <code>/<%= @post.slug %></code>
     <% if @post.published_at? %><span><%= l @post.published_at, format: :short %></span><% end %>
   </div>
@@ -20,4 +22,6 @@
 
 <section class="admin-panel admin-prose">
   <%= simple_format @post.body %>
+  <% if @post.cta_label.present? %><p><strong>Кнопка:</strong> <%= @post.cta_label %></p><% end %>
+  <% if @post.external_url.present? %><p><strong>Внешняя ссылка:</strong> <%= @post.external_url %></p><% end %>
 </section>

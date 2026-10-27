@@ -8,13 +8,15 @@
 <section class="admin-panel">
   <div class="admin-table-wrap">
     <table class="admin-table">
-      <thead><tr><th>Заголовок</th><th>Категория</th><th>Тип</th><th>Статус</th><th></th></tr></thead>
+      <thead><tr><th>Заголовок</th><th>Категория</th><th>Тип</th><th>Размещение</th><th>Компания</th><th>Статус</th><th></th></tr></thead>
       <tbody>
         <% @posts.each do |post| %>
           <tr>
             <td><strong><%= post.title %></strong></td>
             <td><%= post.category.name %></td>
             <td><%= admin_post_kind_label(post) %></td>
+            <td><%= admin_post_placement_label(post) %></td>
+            <td><%= post.supplier&.name || "—" %></td>
             <td><span class="badge"><%= admin_post_status_label(post) %></span></td>
             <td><%= link_to "Открыть", admin_post_path(post), class: "text-link" %></td>
           </tr>

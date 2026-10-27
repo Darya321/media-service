@@ -37,6 +37,27 @@
   </div>
   <div class="admin-form__grid">
     <div class="field">
+      <%= form.label :placement, "Размещение" %>
+      <%= form.select :placement, admin_post_placement_options %>
+      <small>Редакционный материал — без рекламы; партнёрский ведёт в карточку компании.</small>
+    </div>
+    <div class="field">
+      <%= form.label :supplier_id, "Компания" %>
+      <%= form.collection_select :supplier_id, @suppliers, :id, :name, { include_blank: "Без компании" } %>
+      <small>Обязательна только для партнёрского материала.</small>
+    </div>
+    <div class="field">
+      <%= form.label :cta_label, "Текст кнопки" %>
+      <%= form.text_field :cta_label, placeholder: "Открыть компанию" %>
+    </div>
+    <div class="field">
+      <%= form.label :external_url, "Внешняя ссылка" %>
+      <%= form.url_field :external_url, placeholder: "https://company.example/offer" %>
+      <small>Используется только для внешней рекламы.</small>
+    </div>
+  </div>
+  <div class="admin-form__grid">
+    <div class="field">
       <%= form.label :cover_asset, "Файл обложки" %>
       <%= form.text_field :cover_asset, placeholder: "cover.svg" %>
     </div>

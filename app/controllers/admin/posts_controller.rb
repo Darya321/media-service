@@ -1,9 +1,9 @@
 class Admin::PostsController < Admin::BaseController
   before_action :set_post, only: %i[show edit update destroy]
-  before_action :load_categories, only: %i[new create edit update]
+  before_action :load_form_options, only: %i[new create edit update]
 
   def index
-    @posts = Post.includes(:category).order(created_at: :desc)
+    @posts = Post.includes(:category, :supplier).order(created_at: :desc)
   end
 
   def show
@@ -45,8 +45,9 @@ class Admin::PostsController < Admin::BaseController
     @post = Post.find_by!(slug: params[:id])
   end
 
-  def load_categories
+  def load_form_options
     @categories = Category.order(:name)
+    @suppliers = Supplier.available.order(:name)
   end
 
   def post_params
@@ -60,7 +61,11 @@ class Admin::PostsController < Admin::BaseController
       :status,
       :published_at,
       :featured,
-      :cover_asset
+      :cover_asset,
+      :supplier_id,
+      :placement,
+      :cta_label,
+      :external_url
     )
   end
 end
