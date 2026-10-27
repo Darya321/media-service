@@ -18,8 +18,8 @@
   <fieldset class="calculator-step">
     <legend><span>1.</span> Товар</legend>
 
-    <p class="field-label">Что упаковываем</p>
-    <div class="choice-row">
+    <p class="field-label" id="product-type-label">Что упаковываем</p>
+    <div class="choice-row" role="group" aria-labelledby="product-type-label">
       <% {
         "candles" => [ "Свечи", "Свечи в стекле" ],
         "cosmetics" => [ "Косметика", "Косметика" ],
@@ -51,8 +51,8 @@
       </div>
     </div>
 
-    <p class="field-label">Хрупкость</p>
-    <div class="choice-row">
+    <p class="field-label" id="fragility-label">Хрупкость</p>
+    <div class="choice-row" role="group" aria-labelledby="fragility-label">
       <%= radio_button_tag :fragile, "true", values[:fragile].to_s == "true", id: "fragile_true", class: "choice-input" %>
       <%= label_tag :fragile_true, "Хрупкий (стекло)", class: "choice-chip" %>
       <%= radio_button_tag :fragile, "false", values[:fragile].to_s != "true", id: "fragile_false", class: "choice-input" %>
@@ -63,8 +63,8 @@
   <fieldset class="calculator-step">
     <legend><span>2.</span> Упаковка</legend>
 
-    <p class="field-label">Материал</p>
-    <div class="choice-row">
+    <p class="field-label" id="material-label">Материал</p>
+    <div class="choice-row" role="group" aria-labelledby="material-label">
       <% materials.each do |material| %>
         <% id = "material_#{material.slug}" %>
         <%= radio_button_tag :material_slug, material.slug, values[:material_slug] == material.slug,
@@ -73,8 +73,8 @@
       <% end %>
     </div>
 
-    <p class="field-label">Печать</p>
-    <div class="choice-row">
+    <p class="field-label" id="print-label">Печать</p>
+    <div class="choice-row" role="group" aria-labelledby="print-label">
       <% { "Полноцвет" => "full_color", "1 цвет" => "one_color", "Без печати" => "none" }.each do |label, value| %>
         <% id = "print_#{value}" %>
         <%= radio_button_tag :print_option, value, values[:print_option] == value, id: id, class: "choice-input" %>
@@ -82,8 +82,8 @@
       <% end %>
     </div>
 
-    <p class="field-label">Дополнительно</p>
-    <div class="choice-row">
+    <p class="field-label" id="extras-label">Дополнительно</p>
+    <div class="choice-row" role="group" aria-labelledby="extras-label">
       <% { "Вставка-фиксатор" => "insert", "Окно" => "window", "Лак" => "varnish" }.each do |label, value| %>
         <% id = "extra_#{value}" %>
         <%= check_box_tag "extras[]", value, Array(values[:extras]).include?(value), id: id, class: "choice-input" %>

@@ -10,7 +10,7 @@
   <%= render "filters", materials: @materials %>
 
   <% if @suppliers.any? %>
-    <div class="supplier-table" role="table" aria-label="Сравнение поставщиков">
+    <div class="supplier-table" role="table" aria-label="Сравнение поставщиков" data-responsive-layout="table-to-cards">
       <div class="supplier-table__head" role="row">
         <span role="columnheader">Компания</span>
         <span role="columnheader">Специализация</span>

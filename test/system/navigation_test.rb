@@ -22,7 +22,8 @@ class NavigationTest < ApplicationSystemTestCase
 
     button = find("button[aria-controls='site-navigation']")
     assert_equal "false", button["aria-expanded"]
-    assert_equal "click->menu#toggle", button["data-action"]
+    assert_includes button["data-action"], "click->menu#toggle"
+    assert_includes button["data-action"], "keydown.esc@window->menu#close"
     assert_selector "#site-navigation[data-menu-target='panel']", visible: :all
   end
 end
