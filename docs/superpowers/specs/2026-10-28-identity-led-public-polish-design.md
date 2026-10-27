@@ -32,7 +32,7 @@ Alternatives considered:
 - Source logo: the user-supplied transparent PNG. The full wordmark is used in the header and holding page.
 - Favicon: an exact crop of the two-leaf mark from the source logo, exported as square PNG and SVG-compatible browser artwork where practical.
 - Packaging island: retain the current transparent Figma asset and do not render it above its native 546 px width.
-- Gerhaus: reference the locally installed `Gerhaus` face with `local()` and fall back to Helvetica Neue. The font file is not copied into the repository because its redistribution licence is unknown.
+- Gerhaus: copy the user-provided locally installed `Gerhaus-Regular.otf` into the project, expose it through `@font-face`, and fall back to Helvetica Neue. The user confirmed that the font may be used in commercial and non-commercial work, so the repository remains visually portable.
 - Editorial images: generate three landscape images with one shared art direction — high-end packaging editorial photography, natural material texture, warm neutral light, forest/lime accents only where plausible, no text, no logos, no watermark, and enough negative space for card cropping.
 
 ## Page compositions
@@ -76,7 +76,7 @@ Use one unified cream/grid canvas instead of two disconnected halves. A dark-gre
 
 - Do not change calculator formulas, submission behavior, supplier filtering, admin workflows, analytics, or counters.
 - Do not replace the working homepage with the holding page.
-- Do not copy the locally installed Gerhaus font file into Git without a confirmed web/redistribution licence.
+- Package only the confirmed Gerhaus Regular face; do not extend it to interface text or synthesize additional weights.
 - Do not upscale the packaging island beyond its native width.
 - Do not use generated text inside editorial images.
 - Preserve keyboard navigation, accessible names, reduced-motion behavior, and all current routes.
