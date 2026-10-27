@@ -41,6 +41,18 @@
     grid-row: 1;
     width: min(86vw, 34rem);
   }
+
+  .calculator-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .calculator-result {
+    position: static;
+  }
+
+  .field-grid--four {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 560px) {
@@ -72,6 +84,24 @@
 
   .site-footer__links {
     display: grid;
+  }
+
+  .calculator-progress {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-4) var(--space-2);
+  }
+
+  .calculator-progress li {
+    font-size: 0.82rem;
+  }
+
+  .field-grid--four {
+    grid-template-columns: 1fr;
+  }
+
+  .choice-chip {
+    min-height: 2.55rem;
+    padding-inline: 0.8rem;
   }
 }
 

@@ -1,0 +1,21 @@
+<% content_for :title, "Калькулятор упаковки — Упаковано" %>
+
+<section class="calculator-page container">
+  <header class="calculator-page__header">
+    <p class="eyebrow">Калькулятор упаковки</p>
+    <h1>Узнайте, сколько стоит упаковка и кто её сделает</h1>
+    <p>Ответьте на несколько вопросов о товаре. Мы рассчитаем ориентировочную цену и подберём компании под ваш запрос.</p>
+  </header>
+
+  <ol class="calculator-progress" aria-label="Этапы расчёта">
+    <li><span>1</span> Товар</li>
+    <li><span>2</span> Упаковка</li>
+    <li><span>3</span> Условия</li>
+    <li aria-current="step"><span>4</span> Результат</li>
+  </ol>
+
+  <div class="calculator-layout" data-controller="calculator">
+    <%= render "form", values: @calculator_values, materials: @materials %>
+    <%= render "result", result: @result, values: @calculator_values %>
+  </div>
+</section>

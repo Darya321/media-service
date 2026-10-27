@@ -1,0 +1,44 @@
+<aside class="calculator-result" aria-live="polite" data-calculator-target="result">
+  <p class="calculator-result__step">4. Результат</p>
+
+  <% if result %>
+    <p class="calculator-result__price" data-calculator-target="unitPrice"><%= result.unit_price.to_i %> ₽</p>
+    <p class="calculator-result__total" data-calculator-target="totalPrice">
+      за штуку • <%= number_with_delimiter(result.total_price.to_i, delimiter: " ") %> ₽ за <%= values[:quantity] %> штук
+    </p>
+    <p class="calculator-result__range">
+      Диапазон по компаниям: <strong data-calculator-target="range"><%= result.low_price.round.to_i %>–<%= result.high_price.round.to_i %> ₽</strong>
+    </p>
+
+    <div class="price-breakdown">
+      <p>Из чего складывается цена штуки</p>
+      <% {
+        material: "Материал",
+        printing: "Печать",
+        assembly: "Сборка",
+        delivery: "Доставка",
+        waste: "Запас на брак"
+      }.each do |key, label| %>
+        <% percent = ((result.breakdown.fetch(key) / result.unit_price) * 100).round.to_i %>
+        <div class="price-breakdown__row">
+          <span><%= label %></span>
+          <span class="price-breakdown__track" aria-label="<%= label %>: <%= percent %>%">
+            <span style="width: <%= percent %>%"></span>
+          </span>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="calculator-result__actions">
+      <%= link_to "Показать подходящие компании",
+            suppliers_path(material: values[:material_slug], region: values[:region]),
+            class: "button button--accent",
+            data: { calculator_target: "suppliersLink" } %>
+      <%= link_to "Оставить заявку", new_inquiry_path, class: "button calculator-result__secondary" %>
+    </div>
+    <p class="calculator-result__disclaimer" data-calculator-target="disclaimer"><%= CalculatorController::DISCLAIMER %></p>
+  <% else %>
+    <p class="calculator-result__empty" data-calculator-target="unitPrice">Заполните форму, чтобы получить предварительный расчёт.</p>
+    <p class="calculator-result__disclaimer" data-calculator-target="disclaimer"><%= CalculatorController::DISCLAIMER %></p>
+  <% end %>
+</aside>
