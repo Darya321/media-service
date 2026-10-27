@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   root "home#show"
   get "/about", to: "pages#about", as: :about
+  get "/soon", to: "pages#soon", as: :soon
 
   resources :posts, path: "media", param: :slug, only: %i[index show]
   resources :categories, param: :slug, only: :show

@@ -1,6 +1,12 @@
 <header class="site-header" data-controller="menu">
   <div class="site-header__inner container">
-    <%= link_to "Упаковано", root_path, class: "brand", aria: { label: "Упаковано — на главную" } %>
+    <%= link_to root_path, class: "brand", aria: { label: "Упаковано — на главную" } do %>
+      <%= image_tag "brand/upakovano-wordmark.png",
+                    class: "brand__logo",
+                    alt: "",
+                    width: 1731,
+                    height: 326 %>
+    <% end %>
 
     <button class="menu-button"
             type="button"

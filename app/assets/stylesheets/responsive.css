@@ -7,6 +7,15 @@
     grid-template-columns: 1fr auto auto;
   }
 
+  .holding-shell__content {
+    min-height: auto;
+    grid-template-columns: 1fr;
+  }
+
+  .holding-shell__island {
+    grid-row: 1;
+  }
+
   .menu-button {
     display: inline-flex;
   }
@@ -234,6 +243,22 @@
     min-height: 2.5rem;
     padding-inline: 1rem;
     font-size: 0.84rem;
+  }
+
+  .brand__logo {
+    width: 7rem;
+  }
+
+  .holding-shell {
+    width: min(calc(100% - 2 * var(--space-5)), 104rem);
+  }
+
+  .holding-brand img {
+    width: min(65vw, 15rem);
+  }
+
+  .holding-shell__copy h1 {
+    font-size: clamp(3.2rem, 18vw, 5rem);
   }
 
   .hero-shell {

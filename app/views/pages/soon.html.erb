@@ -1,0 +1,24 @@
+<% content_for :title, "Скоро — Упаковано" %>
+
+<section class="holding-shell">
+  <header class="holding-brand">
+    <%= image_tag "brand/upakovano-wordmark.png", alt: "Упаковано", width: 1731, height: 326 %>
+  </header>
+
+  <div class="holding-shell__content">
+    <div class="holding-shell__copy">
+      <p class="eyebrow">Медиа + инструменты</p>
+      <h1>Скоро здесь будет «Упаковано»</h1>
+      <p>Поможем разобраться в материалах, рассчитать ориентир и подготовить запрос производителю.</p>
+      <%= link_to "Открыть проект", root_path, class: "button button--accent" %>
+    </div>
+
+    <%= image_tag "figma/hero-packaging-island-node-203-270.png",
+                  class: "holding-shell__island",
+                  alt: "",
+                  width: 546,
+                  height: 331 %>
+  </div>
+
+  <p class="holding-shell__status"><span aria-hidden="true"></span> Готовим запуск</p>
+</section>

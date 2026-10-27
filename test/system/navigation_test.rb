@@ -4,7 +4,9 @@ class NavigationTest < ApplicationSystemTestCase
   test "desktop navigation opens the about page and returns home" do
     visit root_path
 
-    assert_selector "header", text: "Упаковано"
+    assert_selector ".site-header .brand[href='#{root_path}'][aria-label='Упаковано — на главную']" do
+      assert_selector "img.brand__logo[src*='upakovano-wordmark'][alt='']", count: 1
+    end
     assert_link "О проекте", href: about_path
 
     within(".site-header") { click_link "О проекте" }
@@ -14,7 +16,7 @@ class NavigationTest < ApplicationSystemTestCase
     assert_selector ".about-capabilities [data-capability]", count: 4
     assert_selector "#manufacturers[data-audience='manufacturers']"
 
-    within(".site-header") { click_link "Упаковано" }
+    within(".site-header") { find("a.brand[href='#{root_path}']").click }
 
     assert_current_path root_path
   end
