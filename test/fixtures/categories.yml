@@ -7,3 +7,18 @@ production:
   name: Производство
   slug: production
   description: Процессы производства и печати.
+
+suppliers:
+  name: Производители и поставщики
+  slug: suppliers
+  description: Новости фабрик и поставщиков упаковки.
+
+business_cases:
+  name: Малый бизнес
+  slug: business-cases
+  description: Практические решения и предложения для малого бизнеса.
+
+legislation:
+  name: Законодательство
+  slug: legislation
+  description: Изменения требований и регулирования отрасли.

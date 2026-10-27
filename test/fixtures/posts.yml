@@ -23,7 +23,7 @@ published_without_date:
   cover_asset:
 
 partner_article:
-  category: production
+  category: suppliers
   supplier: kraft_factory
   title: Новая линия коробок
   slug: partner-box-line
@@ -38,7 +38,7 @@ partner_article:
   cta_label: О компании
 
 external_placement:
-  category: materials
+  category: business_cases
   title: Подготовка упаковки к маркетплейсам
   slug: marketplace-packaging-service
   summary: Предложение услуги для небольших интернет-магазинов.
@@ -51,6 +51,19 @@ external_placement:
   placement: 2
   cta_label: Смотреть предложение
   external_url: https://partner.example/offers
+
+legislation_news:
+  category: legislation
+  title: Новые требования к маркировке
+  slug: packaging-labeling-rules
+  summary: Что изменилось в требованиях к упаковке.
+  body: Разбираем новые правила простым языком.
+  kind: 4
+  status: 1
+  published_at: <%= 4.days.ago.to_fs(:db) %>
+  featured: false
+  cover_asset: material-paper.png
+  placement: 0
 
 draft_article:
   category: materials

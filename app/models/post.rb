@@ -41,6 +41,17 @@ class Post < ApplicationRecord
       external: placements.fetch(:external)
     )
   }
+  scope :search_for, ->(query) {
+    term = query.to_s.strip.downcase
+    next all if term.blank?
+
+    matching_ids = filter_map do |post|
+      searchable_text = [ post.title, post.summary, post.body ].join(" ").downcase
+      post.id if searchable_text.include?(term)
+    end
+
+    where(id: matching_ids)
+  }
 
   def slug_source
     title

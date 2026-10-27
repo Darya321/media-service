@@ -58,6 +58,30 @@ class PostTest < ActiveSupport::TestCase
     refute_includes Post.promotable, post
   end
 
+  test "search finds title summary and body without case sensitivity" do
+    assert_includes Post.search_for("КАК ВЫБРАТЬ"), posts(:published_article)
+    assert_includes Post.search_for("КОРОТКИЙ ОРИЕНТИР"), posts(:published_article)
+    assert_includes Post.search_for("ОСНОВНОЙ ТЕКСТ ИНСТРУКЦИИ"), posts(:published_without_date)
+  end
+
+  test "blank search stays chainable and returns every post" do
+    result = Post.search_for("   ")
+
+    assert_kind_of ActiveRecord::Relation, result
+    assert_equal Post.order(:id).pluck(:id), result.order(:id).pluck(:id)
+  end
+
+  test "search treats percent and underscore as literal characters" do
+    percent_match = build_post(title: "Скидка 100%", slug: "literal-percent")
+    percent_decoy = build_post(title: "Скидка 1000", slug: "percent-decoy")
+    underscore_match = build_post(title: "Серия A_B", slug: "literal-underscore")
+    underscore_decoy = build_post(title: "Серия AXB", slug: "underscore-decoy")
+    [ percent_match, percent_decoy, underscore_match, underscore_decoy ].each(&:save!)
+
+    assert_equal [ percent_match ], Post.search_for("100%").to_a
+    assert_equal [ underscore_match ], Post.search_for("A_B").to_a
+  end
+
   test "generates a stable slug from its title" do
     post = Post.new(
       category: categories(:materials),
