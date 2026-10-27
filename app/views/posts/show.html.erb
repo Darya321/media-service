@@ -6,6 +6,9 @@
     <div class="publication__meta">
       <%= link_to @post.category.name, category_path(@post.category) %>
       <span><%= post_kind_label(@post.kind) %></span>
+      <% if (placement_label = post_placement_label(@post)) %>
+        <span class="publication__placement"><%= placement_label %></span>
+      <% end %>
     </div>
     <h1><%= @post.title %></h1>
     <p class="publication__summary"><%= @post.summary %></p>
@@ -14,6 +17,21 @@
   <div class="publication__layout">
     <div class="publication__body">
       <%= simple_format(h(@post.body)) %>
+      <% if (cta_url = post_cta_url(@post)) %>
+        <section class="publication__partner card">
+          <p class="eyebrow"><%= post_placement_label(@post) %></p>
+          <h2><%= @post.supplier&.name || "Предложение партнёра" %></h2>
+          <p><%= @post.cta_label.presence || "Узнайте подробности предложения" %></p>
+          <%= link_to @post.cta_label.presence || "Перейти",
+                cta_url,
+                class: "button button--accent",
+                target: ("_blank" if post_external_cta?(@post)),
+                rel: ("noopener noreferrer" if post_external_cta?(@post)) %>
+          <% if post_external_cta?(@post) %>
+            <span class="publication__external-note">Внешний сайт компании ↗</span>
+          <% end %>
+        </section>
+      <% end %>
     </div>
     <aside class="publication__next card">
       <p class="eyebrow">Следующий шаг</p>

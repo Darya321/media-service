@@ -25,4 +25,15 @@ class ResponsiveLayoutTest < ApplicationSystemTestCase
     assert_includes css, "@media (prefers-reduced-motion: reduce)"
     assert_includes css, "scroll-behavior: auto"
   end
+
+  test "media stylesheet defines tablet and phone compositions" do
+    css = Rails.root.join("app/assets/stylesheets/responsive.css").read
+    tablet_rules = css[/@media \(max-width: 900px\).*?(?=@media \(max-width: 560px\))/m]
+    phone_rules = css[/@media \(max-width: 560px\).*?(?=@media \(prefers-reduced-motion)/m]
+
+    %w[.media-hero .media-toolbar .media-section__grid .media-promotion].each do |selector|
+      assert_includes tablet_rules, selector
+      assert_includes phone_rules, selector
+    end
+  end
 end

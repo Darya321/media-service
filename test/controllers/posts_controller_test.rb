@@ -5,8 +5,8 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     get posts_path
 
     assert_response :success
-    assert_select ".post-card", minimum: 2
-    assert_select ".post-card:first-child h2", /Как выбрать картон/
+    assert_select ".media-card", minimum: 2
+    assert_select ".media-hero__story h2", /Как выбрать картон/
     assert_select "[data-post-slug='draft-review']", count: 0
     assert_select "[data-post-slug='future-news']", count: 0
   end
@@ -61,12 +61,70 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     refute_equal future_law, assigned(:hero_post)
   end
 
+  test "media page renders search filters sections and placement labels" do
+    get posts_path, params: { q: "картон", category: "materials" }
+
+    assert_response :success
+    assert_select ".media-hero[data-post-slug='how-to-choose-cardboard']"
+    assert_select "form.media-search[method='get'] input[name='q'][value='картон']"
+    assert_select "form.media-search input[name='category'][value='materials']"
+    assert_select ".media-categories a[href='#{posts_path(q: "картон", category: "suppliers")}']",
+      text: "Производители и поставщики"
+    assert_select ".media-results"
+
+    get posts_path
+
+    assert_select ".media-section[data-section='suppliers'] [data-post-slug='partner-box-line']" do
+      assert_select ".media-card__sponsor", text: "Партнёрский материал"
+    end
+    assert_select ".media-promotion[data-post-slug='marketplace-packaging-service']"
+    assert_select ".media-section[data-section='legislation'] [data-post-slug='packaging-labeling-rules']"
+  end
+
+  test "media page renders internal and safe external placement calls to action" do
+    get post_path(posts(:partner_article))
+
+    assert_response :success
+    assert_select ".publication__placement", text: "Партнёрский материал"
+    assert_select ".publication__partner a[href='#{supplier_path(suppliers(:kraft_factory))}']",
+      text: "О компании"
+
+    get post_path(posts(:external_placement))
+
+    assert_response :success
+    assert_select ".publication__partner a[href='https://partner.example/offers'][rel='noopener noreferrer']",
+      text: /Смотреть предложение/
+    assert_select ".publication__external-note", text: /Внешний сайт/
+  end
+
+  test "media page shows a useful empty state" do
+    get posts_path, params: { q: "ничего-похожего-нет", category: "materials" }
+
+    assert_response :success
+    assert_select ".media-empty[role='status']", text: /ничего-похожего-нет/
+    assert_select ".media-empty a[href='#{posts_path}']", text: "Сбросить фильтры"
+  end
+
+  test "unsafe external placement does not render a promotion or call to action" do
+    post = posts(:external_placement)
+    post.update_column(:external_url, "javascript:alert('unsafe')")
+
+    get posts_path
+
+    assert_select ".media-promotion[data-post-slug='#{post.slug}']", count: 0
+
+    get post_path(post)
+
+    assert_select ".publication__partner", count: 0
+    assert_select "a[href^='javascript:']", count: 0
+  end
+
   test "index filters by category slug" do
     get posts_path, params: { category: "materials" }
 
     assert_response :success
-    assert_select "[data-post-slug='how-to-choose-cardboard']", count: 1
-    assert_select "[data-post-slug='print-layout']", count: 0
+    assert_select ".media-results [data-post-slug='how-to-choose-cardboard']", count: 1
+    assert_select ".media-results [data-post-slug='print-layout']", count: 0
   end
 
   test "show renders a public post by slug with escaped body" do

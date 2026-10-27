@@ -1,0 +1,19 @@
+<article class="media-hero" data-post-slug="<%= post.slug %>">
+  <div class="media-hero__content">
+    <p class="eyebrow">Медиа · <%= post.category.name %></p>
+    <h1>Всё важное<br>о мире упаковки</h1>
+    <p>Практические статьи, новости компаний, предложения для бизнеса и изменения требований.</p>
+    <%= link_to post_path(post), class: "button button--accent" do %>
+      Читать главный материал <span aria-hidden="true">→</span>
+    <% end %>
+  </div>
+  <div class="media-hero__visual">
+    <% if (asset = post_cover_asset(post)) %>
+      <%= image_tag asset, alt: "Обложка публикации «#{post.title}»" %>
+    <% end %>
+    <div class="media-hero__story">
+      <span><%= post_kind_label(post.kind) %></span>
+      <h2><%= link_to post.title, post_path(post) %></h2>
+    </div>
+  </div>
+</article>

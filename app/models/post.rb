@@ -36,7 +36,8 @@ class Post < ApplicationRecord
   scope :promotable, -> {
     where(
       "(posts.placement = :partner AND posts.supplier_id IS NOT NULL) OR " \
-        "(posts.placement = :external AND posts.external_url IS NOT NULL AND posts.external_url != '')",
+        "(posts.placement = :external AND " \
+        "(posts.external_url LIKE 'http://%' OR posts.external_url LIKE 'https://%'))",
       partner: placements.fetch(:partner),
       external: placements.fetch(:external)
     )

@@ -1,0 +1,19 @@
+<article class="media-card" data-post-slug="<%= post.slug %>">
+  <%= link_to post_path(post), class: "media-card__link" do %>
+    <div class="media-card__cover">
+      <% if (asset = post_cover_asset(post)) %>
+        <%= image_tag asset, alt: "Обложка публикации «#{post.title}»" %>
+      <% end %>
+      <span class="media-card__category"><%= post.category.name %></span>
+    </div>
+    <div class="media-card__body">
+      <% if (placement_label = post_placement_label(post)) %>
+        <span class="media-card__sponsor"><%= placement_label %></span>
+      <% end %>
+      <p class="media-card__date"><%= l(post.published_at, format: :short) if post.published_at? %></p>
+      <h3><%= post.title %></h3>
+      <p><%= post.summary %></p>
+      <span class="media-card__more">Читать <span aria-hidden="true">→</span></span>
+    </div>
+  <% end %>
+</article>
