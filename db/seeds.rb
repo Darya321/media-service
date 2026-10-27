@@ -17,13 +17,18 @@ categories = [
   },
   {
     slug: "suppliers",
-    name: "Поставщики",
-    description: "Разбираемся, как выбрать подрядчика и сравнить предложения."
+    name: "Производители и поставщики",
+    description: "Следим за новыми материалами, производствами и предложениями компаний."
   },
   {
     slug: "business-cases",
-    name: "Истории бизнеса",
-    description: "Практические истории брендов и производителей упаковки."
+    name: "Малый бизнес",
+    description: "Практические истории, услуги и решения для небольших брендов."
+  },
+  {
+    slug: "legislation",
+    name: "Законодательство",
+    description: "Объясняем изменения требований и регулирования упаковочной отрасли."
   }
 ].to_h do |attributes|
   category = upsert_by.call(Category, { slug: attributes.fetch(:slug) }, attributes.except(:slug))
@@ -241,6 +246,87 @@ post_rows = [
     published_at: 4.days.ago,
     featured: false,
     cover_asset: "brand-interview.svg"
+  },
+  {
+    slug: "recycled-cardboard-launch",
+    category: categories.fetch("suppliers"),
+    supplier: suppliers.fetch("eco-pack-factory"),
+    title: "Эко Пак запускает линию упаковки из переработанного картона",
+    summary: "Новое производство помогает небольшим брендам перейти на перерабатываемые материалы.",
+    body: "Фабрика расширила линию картонной упаковки и добавила консультацию по оптимизации конструкции. Материал подготовлен совместно с компанией и отмечен как партнёрский.",
+    kind: :news,
+    status: :published,
+    published_at: 3.days.ago,
+    featured: false,
+    cover_asset: "material-corrugated-cardboard.jpeg",
+    placement: :partner,
+    cta_label: "О компании"
+  },
+  {
+    slug: "short-runs-print-line",
+    category: categories.fetch("suppliers"),
+    supplier: suppliers.fetch("print-line"),
+    title: "Принт Лайн расширяет производство малых тиражей",
+    summary: "Новая линия рассчитана на тестовые партии упаковки и этикеток.",
+    body: "Малые тиражи помогают проверить спрос до крупного заказа. Компания рассказывает, какие файлы нужны для расчёта и как подготовить макет.",
+    kind: :news,
+    status: :published,
+    published_at: 5.days.ago,
+    featured: false,
+    cover_asset: "material-solid-cardboard.jpeg",
+    placement: :partner,
+    cta_label: "О компании"
+  },
+  {
+    slug: "small-business-packaging-audit",
+    category: categories.fetch("business-cases"),
+    title: "Аудит упаковки для небольшого бизнеса",
+    summary: "Разберите текущую упаковку и найдите способы сократить расходы перед следующим тиражом.",
+    body: "Специалисты изучат конструкцию, материал, печать и логистику, а затем предложат несколько вариантов оптимизации. Это демонстрационное рекламное размещение учебного проекта.",
+    kind: :article,
+    status: :published,
+    published_at: 2.days.ago,
+    featured: false,
+    cover_asset: "material-craft-cardboard.jpeg",
+    placement: :external,
+    cta_label: "Смотреть предложение",
+    external_url: "https://example.test/small-business-packaging-audit"
+  },
+  {
+    slug: "packaging-labeling-2026",
+    category: categories.fetch("legislation"),
+    title: "Новые требования к маркировке упаковки",
+    summary: "Какие сведения проверить на этикетке и как подготовиться небольшому бренду.",
+    body: "Собрали общий перечень изменений и вопросы, которые стоит уточнить у профильного специалиста. Материал носит информационный характер и не является юридической консультацией.",
+    kind: :news,
+    status: :published,
+    published_at: 6.days.ago,
+    featured: false,
+    cover_asset: "material-paper.png"
+  },
+  {
+    slug: "extended-producer-responsibility",
+    category: categories.fetch("legislation"),
+    title: "Расширенная ответственность производителей: главное",
+    summary: "Объясняем, какие обязанности могут затрагивать производителей и импортёров.",
+    body: "Перед принятием решений проверьте актуальную редакцию требований и обратитесь к профильному специалисту. Публикация помогает сформировать список вопросов.",
+    kind: :article,
+    status: :published,
+    published_at: 9.days.ago,
+    featured: false,
+    cover_asset: "material-corrugated-cardboard.jpeg"
+  },
+  {
+    slug: "technical-regulation-update",
+    category: categories.fetch("legislation"),
+    title: "Обновления в техническом регулировании",
+    summary: "Ключевые изменения и рекомендации по проверке документации.",
+    body: "Проверьте область применения регламента, документы на материал и требования к маркировке. Этот обзор не заменяет заключение эксперта.",
+    kind: :review,
+    status: :published,
+    published_at: 12.days.ago,
+    featured: false,
+    cover_asset: "material-solid-cardboard.jpeg"
   },
   {
     slug: "packaging-trends-2027",

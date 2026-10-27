@@ -10,7 +10,7 @@
       <% if (placement_label = post_placement_label(post)) %>
         <span class="media-card__sponsor"><%= placement_label %></span>
       <% end %>
-      <p class="media-card__date"><%= l(post.published_at, format: :short) if post.published_at? %></p>
+      <p class="media-card__date"><%= post_publication_date(post) %></p>
       <h3><%= post.title %></h3>
       <p><%= post.summary %></p>
       <span class="media-card__more">Читать <span aria-hidden="true">→</span></span>

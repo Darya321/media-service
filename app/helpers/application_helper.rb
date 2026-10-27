@@ -23,6 +23,10 @@ module ApplicationHelper
     "business-cases" => "figma/material-craft-cardboard.jpeg",
     "legislation" => "figma/material-paper.png"
   }.freeze
+  RUSSIAN_MONTHS = %w[
+    января февраля марта апреля мая июня
+    июля августа сентября октября ноября декабря
+  ].freeze
   MATERIAL_ASSETS = {
     "craft-cardboard" => "figma/material-craft-cardboard.jpeg",
     "microcorrugated-cardboard" => "figma/material-microcorrugated.jpeg",
@@ -49,16 +53,25 @@ module ApplicationHelper
 
   def post_placement_label(post)
     return "Партнёрский материал" if post.partner?
-    return "Рекламное предложение" if post.external?
+
+    "Рекламное предложение" if post.external?
   end
 
   def post_cta_url(post)
     return supplier_path(post.supplier) if post.partner? && post.supplier.present?
-    return post.external_url if post.external? && safe_external_url?(post.external_url)
+
+    post.external_url if post.external? && safe_external_url?(post.external_url)
   end
 
   def post_external_cta?(post)
     post.external? && post_cta_url(post).present?
+  end
+
+  def post_publication_date(post)
+    return unless post.published_at?
+
+    date = post.published_at.in_time_zone.to_date
+    "#{date.day} #{RUSSIAN_MONTHS.fetch(date.month - 1)} #{date.year}"
   end
 
   def material_asset(material)

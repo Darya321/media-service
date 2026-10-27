@@ -2,12 +2,22 @@ require "application_system_test_case"
 
 class AccessibilitySmokeTest < ApplicationSystemTestCase
   test "pages have a single heading skip link and described images" do
-    [ root_path, calculator_path, materials_path, suppliers_path, new_inquiry_path ].each do |path|
+    [ root_path, posts_path, calculator_path, materials_path, suppliers_path, new_inquiry_path ].each do |path|
       visit path
       assert_selector "h1", count: 1
       assert_link "Перейти к содержанию", href: "#main-content", visible: :all
       all("img", visible: :all).each { |image| assert_not_nil image[:alt], "#{path} image must have alt" }
     end
+  end
+
+  test "media search filters and placement actions have accessible names" do
+    visit posts_path
+
+    assert_field "Поиск по медиа"
+    assert_button "Найти"
+    assert_selector "nav[aria-label='Темы публикаций']"
+    assert_link "Производители и поставщики"
+    assert_link "Смотреть предложение", href: "https://partner.example/offers"
   end
 
   test "calculator groups choices labels controls and announces results" do

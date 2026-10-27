@@ -25,6 +25,23 @@ class SeedsTest < ActiveSupport::TestCase
       assert Post.find_by!(slug: "packaging-for-candles").published?
       assert Post.find_by!(slug: "packaging-trends-2027").published_at.future?
       assert Post.find_by!(slug: "future-material-guide").draft?
+
+      legislation = Category.find_by!(slug: "legislation")
+      assert_equal "Законодательство", legislation.name
+
+      partner_post = Post.find_by!(slug: "recycled-cardboard-launch")
+      assert partner_post.partner?
+      assert_equal "eco-pack-factory", partner_post.supplier.slug
+      assert_equal "О компании", partner_post.cta_label
+
+      external_post = Post.find_by!(slug: "small-business-packaging-audit")
+      assert external_post.external?
+      assert_match %r{\Ahttps://}, external_post.external_url
+      assert external_post.valid?
+
+      assert_operator Post.where(category: legislation).publicly_visible.count, :>=, 3
+      refute_includes Post.column_names, "views_count"
+      refute_includes Post.column_names, "impressions_count"
     end
   end
 

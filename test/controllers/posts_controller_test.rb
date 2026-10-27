@@ -76,6 +76,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
 
     assert_select ".media-section[data-section='suppliers'] [data-post-slug='partner-box-line']" do
       assert_select ".media-card__sponsor", text: "Партнёрский материал"
+      assert_select ".media-card__date", text: /\d{1,2} октября 2026/
     end
     assert_select ".media-promotion[data-post-slug='marketplace-packaging-service']"
     assert_select ".media-section[data-section='legislation'] [data-post-slug='packaging-labeling-rules']"

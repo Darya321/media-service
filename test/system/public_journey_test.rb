@@ -1,6 +1,21 @@
 require "application_system_test_case"
 
 class PublicJourneyTest < ApplicationSystemTestCase
+  test "visitor finds a partner article and opens the internal supplier profile" do
+    visit posts_path
+
+    fill_in "Поиск по медиа", with: "линия коробок"
+    click_button "Найти"
+    assert_text "Новая линия коробок"
+    click_link "Новая линия коробок"
+
+    assert_text "Партнёрский материал"
+    click_link "О компании"
+
+    assert_current_path supplier_path(suppliers(:kraft_factory))
+    assert_text "Крафт упаковка"
+  end
+
   test "visitor moves from editorial guidance to calculation supplier and demo inquiry" do
     visit posts_path
     click_link "Как выбрать картон"
