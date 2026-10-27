@@ -11,11 +11,14 @@
   --color-sand: #c8a67a;
   --color-focus: #4f7600;
 
-  --font-sans: "Arimo", Arial, Helvetica, sans-serif;
+  --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
   --text-small: 0.8125rem;
   --text-body: 1rem;
-  --text-lead: clamp(1.05rem, 1.4vw, 1.35rem);
-  --text-title: clamp(2.4rem, 5.4vw, 6.5rem);
+  --text-lead: clamp(1.0625rem, 1.25vw, 1.25rem);
+  --text-title: clamp(4.5rem, 14vw, 15rem);
 
   --space-1: 0.25rem;
   --space-2: 0.5rem;

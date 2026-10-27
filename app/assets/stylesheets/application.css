@@ -15,8 +15,31 @@ body {
   background-color: var(--color-paper);
   font-family: var(--font-sans);
   font-size: var(--text-body);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: -0.012em;
   line-height: 1.35;
   text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: var(--font-weight-medium);
+  text-wrap: balance;
+}
+
+p,
+li,
+dd {
+  text-wrap: pretty;
+}
+
+strong,
+b {
+  font-weight: var(--font-weight-semibold);
 }
 
 img,

@@ -203,7 +203,7 @@
   }
 
   .hero-shell__wordmark {
-    font-size: clamp(3.15rem, 19vw, 5rem);
+    font-size: clamp(3.75rem, 17vw, 6rem);
   }
 
   .site-footer__inner {

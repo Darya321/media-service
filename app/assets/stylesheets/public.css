@@ -24,7 +24,7 @@
 .brand {
   width: fit-content;
   font-size: 1.1rem;
-  font-weight: 700;
+  font-weight: var(--font-weight-semibold);
   letter-spacing: -0.04em;
   text-decoration: none;
   text-transform: uppercase;
@@ -103,12 +103,15 @@
 }
 
 .hero-shell__wordmark {
-  margin: 0;
+  width: 100vw;
+  margin: 0 0 0 calc(50% - 50vw);
+  overflow: clip;
   color: var(--color-white);
   font-size: var(--text-title);
-  font-weight: 700;
-  letter-spacing: -0.07em;
-  line-height: 0.8;
+  font-weight: var(--font-weight-medium);
+  letter-spacing: -0.075em;
+  line-height: 0.76;
+  text-align: center;
   text-transform: uppercase;
   white-space: nowrap;
 }
@@ -249,7 +252,7 @@
 .calculator-step legend {
   margin-bottom: var(--space-5);
   font-size: clamp(1.65rem, 2.6vw, 2.3rem);
-  font-weight: 700;
+  font-weight: var(--font-weight-medium);
   letter-spacing: -0.04em;
 }
 
@@ -263,7 +266,7 @@
   display: block;
   margin: 0 0 var(--space-3);
   font-size: 0.83rem;
-  font-weight: 700;
+  font-weight: var(--font-weight-medium);
 }
 
 .choice-row {
@@ -355,7 +358,7 @@
 
 .form-errors__title {
   margin: 0;
-  font-weight: 700;
+  font-weight: var(--font-weight-semibold);
 }
 
 .calculator-result {
@@ -370,7 +373,7 @@
   margin-top: 0;
   color: #dce9b4;
   font-size: 0.84rem;
-  font-weight: 700;
+  font-weight: var(--font-weight-medium);
   text-transform: uppercase;
 }
 
@@ -378,7 +381,7 @@
   margin: var(--space-6) 0 0;
   color: var(--color-accent);
   font-size: clamp(4.7rem, 10vw, 8.7rem);
-  font-weight: 700;
+  font-weight: var(--font-weight-medium);
   letter-spacing: -0.08em;
   line-height: 0.82;
 }
@@ -397,7 +400,7 @@
 
 .price-breakdown > p {
   margin: 0 0 var(--space-4);
-  font-weight: 700;
+  font-weight: var(--font-weight-medium);
 }
 
 .price-breakdown__row {
@@ -511,7 +514,7 @@
   padding: var(--space-4) var(--space-5);
   border-bottom: 1px solid var(--color-line);
   font-size: 0.75rem;
-  font-weight: 700;
+  font-weight: var(--font-weight-medium);
 }
 
 .supplier-row {
@@ -542,7 +545,7 @@
   border: 1px solid var(--color-ink);
   border-radius: 999px;
   font-size: 0.62rem;
-  font-weight: 700;
+  font-weight: var(--font-weight-medium);
   text-transform: uppercase;
 }
 
@@ -610,13 +613,13 @@
   margin-bottom: var(--space-2);
   color: var(--color-muted);
   font-size: 0.76rem;
-  font-weight: 700;
+  font-weight: var(--font-weight-medium);
   text-transform: uppercase;
 }
 
 .supplier-profile__facts dd {
   margin: 0;
-  font-weight: 700;
+  font-weight: var(--font-weight-medium);
 }
 
 .supplier-profile__facts .button {
@@ -672,7 +675,7 @@
 .inquiry-form__extras legend {
   width: 100%;
   margin-bottom: var(--space-3);
-  font-weight: 700;
+  font-weight: var(--font-weight-medium);
 }
 
 .inquiry-confirmation {
@@ -691,13 +694,13 @@
   border: 1px solid var(--color-focus);
   border-radius: var(--radius-control);
   background: var(--color-accent-soft);
-  font-weight: 700;
+  font-weight: var(--font-weight-medium);
 }
 
 .inquiry-confirmation__price {
   margin: var(--space-7) 0 var(--space-2);
   font-size: clamp(3.8rem, 8vw, 7rem);
-  font-weight: 700;
+  font-weight: var(--font-weight-medium);
   letter-spacing: -0.07em;
   line-height: 0.9;
 }
@@ -1141,7 +1144,7 @@
 .post-card__cover > span {
   color: rgb(255 255 255 / 72%);
   font-size: clamp(5rem, 14vw, 12rem);
-  font-weight: 700;
+  font-weight: var(--font-weight-medium);
 }
 
 .post-card__body {
@@ -1158,7 +1161,7 @@
 .post-card__meta span {
   color: var(--color-muted);
   font-size: 0.72rem;
-  font-weight: 700;
+  font-weight: var(--font-weight-medium);
   text-transform: uppercase;
 }
 
@@ -1174,7 +1177,7 @@
 }
 
 .post-card__more {
-  font-weight: 700;
+  font-weight: var(--font-weight-medium);
 }
 
 .post-card__link:hover .post-card__more {
@@ -1201,15 +1204,6 @@
   max-width: 48rem;
   font-size: clamp(1.1rem, 1.8vw, 1.35rem);
   line-height: 1.65;
-}
-
-.publication__body p:first-child::first-letter {
-  float: left;
-  margin: 0.04em 0.12em 0 0;
-  color: var(--color-forest);
-  font-size: 4.6em;
-  font-weight: 700;
-  line-height: 0.78;
 }
 
 .publication__next {
@@ -1254,7 +1248,7 @@
   margin-top: var(--space-3);
   color: var(--color-muted);
   font-size: var(--text-small);
-  font-weight: 700;
+  font-weight: var(--font-weight-medium);
 }
 
 .related-posts {
@@ -1307,7 +1301,7 @@
   border-radius: 999px;
   color: var(--color-ink);
   font-size: 0.82rem;
-  font-weight: 700;
+  font-weight: var(--font-weight-medium);
   text-decoration: none;
 }
 
@@ -1394,7 +1388,7 @@
   align-items: center;
   gap: var(--space-3);
   font-size: 0.78rem;
-  font-weight: 700;
+  font-weight: var(--font-weight-medium);
 }
 
 .material-score__track {
@@ -1534,7 +1528,7 @@
 .home-tool-card > a {
   align-self: end;
   color: var(--color-ink);
-  font-weight: 700;
+  font-weight: var(--font-weight-medium);
 }
 
 .home-tool-card__materials {
@@ -1799,7 +1793,7 @@
 
 .subscription-form__message {
   margin: 0 0 var(--space-3);
-  font-weight: 700;
+  font-weight: var(--font-weight-medium);
 }
 
 .subscription-form small {

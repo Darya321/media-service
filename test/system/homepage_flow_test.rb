@@ -1,6 +1,13 @@
 require "application_system_test_case"
 
 class HomepageFlowTest < ApplicationSystemTestCase
+  test "homepage exposes the full bleed wordmark and typography treatment" do
+    visit root_path
+
+    assert_selector "body[data-controller~='typography']"
+    assert_selector ".hero-shell__wordmark[data-full-bleed-wordmark]", text: "Упаковано"
+  end
+
   test "homepage connects its tools content and local subscription" do
     visit root_path
 
