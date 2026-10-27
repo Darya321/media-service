@@ -12,9 +12,8 @@
       <% if post_external_cta?(post) %><span class="media-promotion__external">Внешний сайт ↗</span><% end %>
     <% end %>
   </div>
-  <div class="media-promotion__visual">
-    <% if (asset = post_cover_asset(post)) %>
-      <%= image_tag asset, alt: "Иллюстрация предложения «#{post.title}»" %>
-    <% end %>
+  <div class="media-promotion__visual media-visual media-visual--business-cases" aria-hidden="true">
+    <span class="media-visual__index">04</span>
+    <span class="media-visual__label">Предложение для бизнеса</span>
   </div>
 </article>

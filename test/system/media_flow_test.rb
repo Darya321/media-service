@@ -9,12 +9,14 @@ class MediaFlowTest < ApplicationSystemTestCase
       click_button "Найти"
     end
     assert_current_path posts_path(q: "картон")
+    assert_equal "media-catalog", URI.parse(page.current_url).fragment
     assert_selector ".media-results"
 
     within ".media-categories" do
       click_link "Материалы"
     end
     assert_current_path posts_path(q: "картон", category: "materials")
+    assert_equal "media-catalog", URI.parse(page.current_url).fragment
 
     click_link "Как выбрать картон"
     assert_current_path post_path("how-to-choose-cardboard")

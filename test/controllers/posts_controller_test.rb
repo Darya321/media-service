@@ -65,10 +65,11 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     get posts_path, params: { q: "картон", category: "materials" }
 
     assert_response :success
+    assert_select "#media-catalog.media-catalog"
     assert_select ".media-hero[data-post-slug='how-to-choose-cardboard']"
-    assert_select "form.media-search[method='get'] input[name='q'][value='картон']"
+    assert_select "form.media-search[method='get'][action='#{posts_path(anchor: "media-catalog")}'] input[name='q'][value='картон']"
     assert_select "form.media-search input[name='category'][value='materials']"
-    assert_select ".media-categories a[href='#{posts_path(q: "картон", category: "suppliers")}']",
+    assert_select ".media-categories a[href='#{posts_path(q: "картон", category: "suppliers", anchor: "media-catalog")}']",
       text: "Производители и поставщики"
     assert_select ".media-results"
 
@@ -81,6 +82,22 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     end
     assert_select ".media-promotion[data-post-slug='marketplace-packaging-service']"
     assert_select ".media-section[data-section='legislation'] [data-post-slug='packaging-labeling-rules']"
+  end
+
+  test "media catalogue uses crisp editorial visuals without raster covers" do
+    get posts_path
+
+    assert_response :success
+    assert_select ".media-hero img", count: 0
+    assert_select ".media-hero .media-visual", minimum: 1
+    assert_select ".media-card img", count: 0
+    assert_select ".media-card .media-visual", minimum: 2
+    assert_select ".media-promotion img", count: 0
+    assert_select ".media-promotion .media-visual", count: 1
+
+    get post_path(posts(:published_article))
+
+    assert_select ".related-posts .post-card img", count: 0
   end
 
   test "media page renders internal and safe external placement calls to action" do
@@ -104,7 +121,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_select ".media-empty[role='status']", text: /ничего-похожего-нет/
-    assert_select ".media-empty a[href='#{posts_path}']", text: "Сбросить фильтры"
+    assert_select ".media-empty a[href='#{posts_path(anchor: "media-catalog")}']", text: "Сбросить фильтры"
   end
 
   test "unsafe external placement does not render a promotion or call to action" do

@@ -3,27 +3,37 @@
 <section class="media-page container">
   <%= render "media_feature", post: @hero_post if @hero_post %>
 
-  <div class="media-toolbar">
-    <nav class="media-categories" aria-label="Темы публикаций">
+  <section id="media-catalog" class="media-catalog" aria-labelledby="media-catalog-title">
+    <header class="media-catalog__heading">
+      <div>
+        <p class="eyebrow">Каталог публикаций</p>
+        <h2 id="media-catalog-title">Выберите тему</h2>
+      </div>
+      <p>Практические материалы, отраслевые новости и важные изменения — в одном разделе.</p>
+    </header>
+
+    <div class="media-toolbar">
+      <nav class="media-categories" aria-label="Темы публикаций">
       <%= link_to "Все",
-            posts_path(q: @query.presence),
+            posts_path(q: @query.presence, anchor: "media-catalog"),
             class: ("is-active" if params[:category].blank?),
             aria: (params[:category].blank? ? { current: "page" } : nil) %>
       <% @media_categories.each do |category| %>
         <%= link_to category.name,
-              posts_path(q: @query.presence, category: category.slug),
+              posts_path(q: @query.presence, category: category.slug, anchor: "media-catalog"),
               class: ("is-active" if @selected_category == category),
               aria: (@selected_category == category ? { current: "page" } : nil) %>
       <% end %>
-    </nav>
+      </nav>
 
-    <%= form_with url: posts_path, method: :get, class: "media-search", data: { turbo: false } do %>
-      <%= label_tag :q, "Поиск по медиа", class: "visually-hidden" %>
-      <%= search_field_tag :q, @query, placeholder: "Поиск по медиа", aria: { label: "Поиск по медиа" } %>
-      <%= hidden_field_tag :category, params[:category] if params[:category].present? %>
-      <%= button_tag "Найти", type: :submit, name: nil, class: "button button--dark" %>
-    <% end %>
-  </div>
+      <%= form_with url: posts_path(anchor: "media-catalog"), method: :get, class: "media-search", data: { turbo: false } do %>
+        <%= label_tag :q, "Поиск по медиа", class: "visually-hidden" %>
+        <%= search_field_tag :q, @query, placeholder: "Поиск по публикациям", aria: { label: "Поиск по медиа" } %>
+        <%= hidden_field_tag :category, params[:category] if params[:category].present? %>
+        <%= button_tag "Найти", type: :submit, name: nil, class: "button button--dark" %>
+      <% end %>
+    </div>
+  </section>
 
   <% if @filtering %>
     <section class="media-results" aria-labelledby="media-results-title">
@@ -50,7 +60,7 @@
           <p class="eyebrow">Ничего не найдено</p>
           <h3>Попробуйте изменить запрос «<%= @query.presence || params[:category] %>»</h3>
           <p>Можно выбрать другую тему или вернуться ко всем публикациям.</p>
-          <%= link_to "Сбросить фильтры", posts_path, class: "button button--dark" %>
+          <%= link_to "Сбросить фильтры", posts_path(anchor: "media-catalog"), class: "button button--dark" %>
         </div>
       <% end %>
   <% else %>

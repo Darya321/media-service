@@ -1,10 +1,8 @@
 <article class="media-card" data-post-slug="<%= post.slug %>">
   <%= link_to post_path(post), class: "media-card__link" do %>
-    <div class="media-card__cover">
-      <% if (asset = post_cover_asset(post)) %>
-        <%= image_tag asset, alt: "Обложка публикации «#{post.title}»" %>
-      <% end %>
+    <div class="media-card__cover media-visual media-visual--<%= post.category.slug %>">
       <span class="media-card__category"><%= post.category.name %></span>
+      <span class="media-visual__label"><%= post_kind_label(post.kind) %></span>
     </div>
     <div class="media-card__body">
       <% if (placement_label = post_placement_label(post)) %>
