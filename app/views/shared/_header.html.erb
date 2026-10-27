@@ -1,0 +1,25 @@
+<header class="site-header" data-controller="menu">
+  <div class="site-header__inner container">
+    <%= link_to "Упаковано", root_path, class: "brand", aria: { label: "Упаковано — на главную" } %>
+
+    <button class="menu-button"
+            type="button"
+            aria-controls="site-navigation"
+            aria-expanded="false"
+            data-menu-target="button"
+            data-action="click->menu#toggle">
+      <span class="menu-button__icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Открыть меню</span>
+    </button>
+
+    <nav class="site-nav" id="site-navigation" aria-label="Основная навигация" data-menu-target="panel">
+      <%= nav_link_to "Медиа", posts_path %>
+      <%= nav_link_to "Калькулятор", calculator_path %>
+      <%= nav_link_to "Материалы", materials_path %>
+      <%= nav_link_to "Поставщики", suppliers_path %>
+      <%= nav_link_to "О проекте", about_path %>
+    </nav>
+
+    <%= link_to "Рассчитать", calculator_path, class: "button button--accent site-header__action" %>
+  </div>
+</header>

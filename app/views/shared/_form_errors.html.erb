@@ -1,0 +1,10 @@
+<% if local_assigns[:object]&.errors&.any? %>
+  <div class="form-errors" role="alert">
+    <p class="form-errors__title">Проверьте заполнение формы:</p>
+    <ul>
+      <% object.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

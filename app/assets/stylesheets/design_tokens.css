@@ -1,0 +1,37 @@
+:root {
+  --color-paper: #eeede9;
+  --color-white: #ffffff;
+  --color-ink: #080908;
+  --color-line: #cecec8;
+  --color-muted: #62625f;
+  --color-accent: #b9ff00;
+  --color-accent-soft: #e9ffb8;
+  --color-forest: #294f23;
+  --color-moss: #7a8f55;
+  --color-sand: #c8a67a;
+  --color-focus: #4f7600;
+
+  --font-sans: "Arimo", Arial, Helvetica, sans-serif;
+  --text-small: 0.8125rem;
+  --text-body: 1rem;
+  --text-lead: clamp(1.05rem, 1.4vw, 1.35rem);
+  --text-title: clamp(2.4rem, 5.4vw, 6.5rem);
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: 6rem;
+
+  --radius-control: 0.75rem;
+  --radius-card: 1.75rem;
+  --radius-panel: 2.5rem;
+  --radius-pill: 999px;
+  --border-thin: 1px solid var(--color-ink);
+  --container: 101.25rem;
+  --content: 88rem;
+}
