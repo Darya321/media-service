@@ -1,0 +1,33 @@
+<% content_for :title, "#{@supplier.name} — Упаковано" %>
+
+<article class="supplier-profile container" data-supplier-slug="<%= @supplier.slug %>">
+  <%= link_to "← Все поставщики", suppliers_path, class: "back-link" %>
+  <header class="supplier-profile__header">
+    <div>
+      <p class="eyebrow"><%= SuppliersController::COMPANY_TYPE_LABELS.fetch(@supplier.company_type) %></p>
+      <h1><%= @supplier.name %></h1>
+      <p class="supplier-profile__lead"><%= @supplier.specialization %></p>
+    </div>
+    <% if @supplier.promoted? %><span class="supplier-row__ad">Реклама</span><% end %>
+  </header>
+
+  <div class="supplier-profile__grid">
+    <section class="card supplier-profile__description">
+      <h2>О компании</h2>
+      <%= simple_format(@supplier.description) %>
+      <h3>Услуги</h3>
+      <ul><% @supplier.services.each do |service| %><li><%= service %></li><% end %></ul>
+    </section>
+    <aside class="card supplier-profile__facts">
+      <dl>
+        <div><dt>Минимальный тираж</dt><dd><%= @supplier.minimum_order.zero? ? "Нет" : "от #{@supplier.minimum_order} шт" %></dd></div>
+        <div><dt>Цена</dt><dd>от <%= number_to_currency(@supplier.unit_price_from, unit: "₽", format: "%n %u", precision: 0) %></dd></div>
+        <div><dt>Регионы</dt><dd><%= @supplier.regions.join(", ") %></dd></div>
+        <div><dt>Материалы</dt><dd><%= @supplier.materials.map(&:name).join(", ") %></dd></div>
+      </dl>
+      <%= link_to "Оставить заявку",
+            new_inquiry_path(supplier_id: @supplier.id, material_slug: @supplier.materials.first&.slug),
+            class: "button button--accent" %>
+    </aside>
+  </div>
+</article>

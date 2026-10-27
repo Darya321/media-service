@@ -7,6 +7,12 @@ class CalculatorControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select "h1", /Узнайте, сколько стоит упаковка/
     assert_select "input[value='microcorrugated-cardboard']"
+    assert_select "a[data-calculator-target='inquiryLink']" do |links|
+      query = Rack::Utils.parse_nested_query(URI.parse(links.first["href"]).query)
+      assert_equal "microcorrugated-cardboard", query["material_slug"]
+      assert_equal "500", query["quantity"]
+      assert_equal "Москва", query["region"]
+    end
   end
 
   test "returns the reference estimate as json without persisting a lead" do

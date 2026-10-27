@@ -34,7 +34,14 @@
             suppliers_path(material: values[:material_slug], region: values[:region]),
             class: "button button--accent",
             data: { calculator_target: "suppliersLink" } %>
-      <%= link_to "Оставить заявку", new_inquiry_path, class: "button calculator-result__secondary" %>
+      <%= link_to "Оставить заявку",
+            new_inquiry_path(values.slice(
+              :product_type, :length_mm, :width_mm, :height_mm, :weight_grams,
+              :fragile, :material_slug, :quantity, :budget, :deadline, :region,
+              :print_option, :extras
+            )),
+            class: "button calculator-result__secondary",
+            data: { calculator_target: "inquiryLink" } %>
     </div>
     <p class="calculator-result__disclaimer" data-calculator-target="disclaimer"><%= CalculatorController::DISCLAIMER %></p>
   <% else %>

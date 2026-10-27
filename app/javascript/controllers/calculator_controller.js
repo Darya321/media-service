@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["form", "submit", "errors", "unitPrice", "totalPrice", "range", "disclaimer", "suppliersLink"]
+  static targets = ["form", "submit", "errors", "unitPrice", "totalPrice", "range", "disclaimer", "suppliersLink", "inquiryLink"]
 
   async submit(event) {
     event.preventDefault()
@@ -37,6 +37,12 @@ export default class extends Controller {
         region: formData.get("region")
       })
       this.suppliersLinkTarget.href = `/suppliers?${query.toString()}`
+
+      const inquiryQuery = new URLSearchParams()
+      formData.forEach((value, key) => {
+        if (key !== "authenticity_token") inquiryQuery.append(key, value)
+      })
+      this.inquiryLinkTarget.href = `/inquiries/new?${inquiryQuery.toString()}`
     } catch (_error) {
       this.showErrors({ base: ["Не удалось выполнить расчёт. Попробуйте ещё раз."] })
     } finally {

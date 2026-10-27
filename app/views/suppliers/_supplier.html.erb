@@ -1,0 +1,11 @@
+<article class="supplier-row <%= "supplier-row--promoted" if supplier.promoted? %>" role="row" data-supplier-slug="<%= supplier.slug %>">
+  <div class="supplier-row__company" role="cell">
+    <strong><%= supplier.name %></strong>
+    <% if supplier.promoted? %><span class="supplier-row__ad">Реклама</span><% end %>
+  </div>
+  <div role="cell" data-label="Специализация"><%= supplier.specialization %></div>
+  <div role="cell" data-label="Мин. тираж"><%= supplier.minimum_order.zero? ? "Нет" : "от #{supplier.minimum_order} шт" %></div>
+  <div role="cell" data-label="Материалы"><%= supplier.materials.map(&:name).join(", ") %></div>
+  <div role="cell" data-label="Цена от"><%= number_to_currency(supplier.unit_price_from, unit: "₽", format: "%n %u", precision: 0) %></div>
+  <div class="supplier-row__action" role="cell"><%= link_to "Подробнее", supplier_path(supplier), class: "button" %></div>
+</article>

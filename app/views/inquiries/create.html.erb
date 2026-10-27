@@ -1,0 +1,16 @@
+<% content_for :title, "Заявка сохранена — Упаковано" %>
+
+<section class="inquiry-confirmation container">
+  <div class="inquiry-confirmation__card card">
+    <p class="eyebrow">Готово</p>
+    <h1>Параметры заявки сохранены</h1>
+    <p class="inquiry-confirmation__notice">Учебная заявка не отправлена компании и не создаёт коммерческих обязательств.</p>
+    <% if @inquiry.supplier %><p>Выбранная компания: <strong><%= @inquiry.supplier.name %></strong></p><% end %>
+    <p class="inquiry-confirmation__price"><%= @inquiry.estimated_unit_price.to_i %> ₽ <span>за штуку</span></p>
+    <p>Предварительный итог: <%= number_with_delimiter(@inquiry.estimated_total_price.to_i, delimiter: " ") %> ₽</p>
+    <div class="inquiry-confirmation__actions">
+      <%= link_to "Вернуться к поставщикам", suppliers_path, class: "button button--dark" %>
+      <%= link_to "Новый расчёт", calculator_path, class: "button" %>
+    </div>
+  </div>
+</section>

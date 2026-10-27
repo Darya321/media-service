@@ -23,6 +23,9 @@ class CalculatorFlowTest < ApplicationSystemTestCase
     assert_text "21–28 ₽"
     assert_text(/предваритель/i)
     assert_link "Показать подходящие компании", href: suppliers_path(material: "microcorrugated-cardboard", region: "Москва")
-    assert_link "Оставить заявку", href: new_inquiry_path
+    inquiry_link = find_link("Оставить заявку")
+    inquiry_query = Rack::Utils.parse_nested_query(URI.parse(inquiry_link[:href]).query)
+    assert_equal "microcorrugated-cardboard", inquiry_query["material_slug"]
+    assert_equal "500", inquiry_query["quantity"]
   end
 end

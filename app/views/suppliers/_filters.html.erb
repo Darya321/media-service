@@ -1,0 +1,21 @@
+<%= form_with url: suppliers_path, method: :get, class: "supplier-filters", data: { turbo: false } do %>
+  <div class="field">
+    <%= label_tag :company_type, "Тип компании" %>
+    <%= select_tag :company_type,
+          options_for_select([[ "Все", "" ]] + SuppliersController::COMPANY_TYPE_LABELS.map { |value, label| [ label, value ] }, params[:company_type]) %>
+  </div>
+  <div class="field">
+    <%= label_tag :material, "Материал" %>
+    <%= select_tag :material,
+          options_for_select([[ "Все материалы", "" ]] + materials.map { |material| [ material.name, material.slug ] }, params[:material]) %>
+  </div>
+  <div class="field">
+    <%= label_tag :region, "Регион" %>
+    <%= select_tag :region,
+          options_for_select([ "", "Москва", "Московская область", "Санкт-Петербург", "Центральный регион" ], params[:region]) %>
+  </div>
+  <%= submit_tag "Показать", class: "button button--dark" %>
+  <% if params.slice(:company_type, :material, :region).values.any?(&:present?) %>
+    <%= link_to "Сбросить", suppliers_path, class: "supplier-filters__reset" %>
+  <% end %>
+<% end %>

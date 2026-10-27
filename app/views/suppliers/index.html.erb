@@ -1,0 +1,33 @@
+<% content_for :title, "Поставщики упаковки — Упаковано" %>
+
+<section class="directory-page container">
+  <header class="directory-page__header">
+    <p class="eyebrow">Поставщики</p>
+    <h1>Сравните компании по одинаковым критериям</h1>
+    <p>Фильтруйте компании по типу, материалу и региону. Карточки содержат демонстрационные данные для учебного проекта.</p>
+  </header>
+
+  <%= render "filters", materials: @materials %>
+
+  <% if @suppliers.any? %>
+    <div class="supplier-table" role="table" aria-label="Сравнение поставщиков">
+      <div class="supplier-table__head" role="row">
+        <span role="columnheader">Компания</span>
+        <span role="columnheader">Специализация</span>
+        <span role="columnheader">Мин. тираж</span>
+        <span role="columnheader">Материалы</span>
+        <span role="columnheader">Цена от</span>
+        <span aria-hidden="true"></span>
+      </div>
+      <div class="supplier-table__body">
+        <%= render @suppliers %>
+      </div>
+    </div>
+  <% else %>
+    <div class="empty-state card">
+      <h2>Пока не нашли подходящие компании</h2>
+      <p>Измените фильтры или оставьте общую учебную заявку.</p>
+      <%= link_to "Оставить заявку", new_inquiry_path, class: "button button--dark" %>
+    </div>
+  <% end %>
+</section>

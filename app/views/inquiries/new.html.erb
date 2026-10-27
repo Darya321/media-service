@@ -1,0 +1,50 @@
+<% content_for :title, "Учебная заявка — Упаковано" %>
+
+<section class="inquiry-page container">
+  <header class="inquiry-page__header">
+    <p class="eyebrow">Учебная заявка</p>
+    <h1>Передайте параметры упаковки</h1>
+    <p>Мы сохраним заявку внутри учебного сервиса. Она не будет отправлена выбранной компании.</p>
+  </header>
+
+  <%= form_with model: @inquiry, url: inquiries_path, class: "inquiry-form card" do |form| %>
+    <% if @inquiry.errors.any? %>
+      <div class="form-errors" role="alert">
+        <p class="form-errors__title">Проверьте поля:</p>
+        <ul><% @inquiry.errors.full_messages.each do |message| %><li><%= message %></li><% end %></ul>
+      </div>
+    <% end %>
+
+    <% if @supplier %>
+      <div class="inquiry-form__supplier">
+        <span>Получатель</span><strong><%= @supplier.name %></strong>
+      </div>
+    <% end %>
+    <%= form.hidden_field :supplier_id, value: @form_values[:supplier_id] %>
+
+    <div class="field-grid inquiry-form__grid">
+      <div class="field field--wide"><%= form.label :email, "Email" %><%= form.email_field :email, required: true %></div>
+      <div class="field"><%= form.label :product_type, "Товар" %><%= form.text_field :product_type, required: true %></div>
+      <div class="field"><%= label_tag "inquiry_material_slug", "Материал" %><%= select_tag "inquiry[material_slug]", options_for_select(@materials.map { |material| [ material.name, material.slug ] }, @form_values[:material_slug]), required: true %></div>
+      <div class="field"><%= form.label :length_mm, "Длина, мм" %><%= form.number_field :length_mm, min: 1, max: 5000, required: true %></div>
+      <div class="field"><%= form.label :width_mm, "Ширина, мм" %><%= form.number_field :width_mm, min: 1, max: 5000, required: true %></div>
+      <div class="field"><%= form.label :height_mm, "Высота, мм" %><%= form.number_field :height_mm, min: 1, max: 5000, required: true %></div>
+      <div class="field"><%= form.label :weight_grams, "Вес, г" %><%= form.number_field :weight_grams, min: 0, max: 100000 %></div>
+      <div class="field"><%= form.label :quantity, "Тираж, шт" %><%= form.number_field :quantity, min: 1, max: 1000000, required: true %></div>
+      <div class="field"><%= form.label :budget, "Бюджет, ₽" %><%= form.number_field :budget, min: 0 %></div>
+      <div class="field"><%= form.label :deadline, "Срок" %><%= form.date_field :deadline %></div>
+      <div class="field"><%= form.label :region, "Регион" %><%= form.select :region, [ "Москва", "Санкт-Петербург", "Центральный регион", "Другой регион" ] %></div>
+      <div class="field"><%= form.label :print_option, "Печать" %><%= form.select :print_option, [[ "Без печати", "none" ], [ "1 цвет", "one_color" ], [ "Полноцвет", "full_color" ]] %></div>
+    </div>
+
+    <label class="inquiry-form__check"><%= form.check_box :fragile %><span>Товар хрупкий</span></label>
+    <fieldset class="inquiry-form__extras">
+      <legend>Дополнительно</legend>
+      <% { "Вставка-фиксатор" => "insert", "Окно" => "window", "Лак" => "varnish" }.each do |label, value| %>
+        <label><%= check_box_tag "inquiry[extras][]", value, Array(@form_values[:extras]).include?(value), id: "inquiry_extra_#{value}" %><span><%= label %></span></label>
+      <% end %>
+    </fieldset>
+
+    <%= form.submit "Создать учебную заявку", class: "button button--accent" %>
+  <% end %>
+</section>
