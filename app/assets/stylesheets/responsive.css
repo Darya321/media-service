@@ -136,6 +136,7 @@
 
   .media-hero__visual {
     min-height: 28rem;
+    align-items: flex-start;
     border-top: 1px solid var(--color-ink);
     border-left: 0;
   }

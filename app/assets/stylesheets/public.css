@@ -118,7 +118,7 @@
 
 .hero-shell__layout {
   display: grid;
-  grid-template-columns: minmax(18rem, 0.8fr) minmax(22rem, 1.2fr);
+  grid-template-columns: repeat(2, minmax(22rem, 1fr));
   align-items: end;
   gap: var(--space-7);
   margin-top: clamp(2rem, 4vw, 4rem);
@@ -127,10 +127,18 @@
 .hero-shell h1,
 .editorial-page h1 {
   margin: 0;
-  max-width: 12ch;
-  font-size: clamp(2.3rem, 4.5vw, 4.3rem);
   letter-spacing: -0.055em;
   line-height: 0.95;
+}
+
+.hero-shell h1 {
+  max-width: 18ch;
+  font-size: clamp(2.3rem, 4vw, 3.8rem);
+}
+
+.editorial-page h1 {
+  max-width: 12ch;
+  font-size: clamp(2.3rem, 4.5vw, 4.3rem);
 }
 
 .hero-shell__lead {
