@@ -4,6 +4,7 @@ class Supplier < ApplicationRecord
   has_many :supplier_materials, dependent: :destroy
   has_many :materials, through: :supplier_materials
   has_many :inquiries, dependent: :nullify
+  has_many :posts, dependent: :nullify
 
   enum :company_type, {
     factory: 0,

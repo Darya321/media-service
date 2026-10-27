@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_27_000900) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_27_001000) do
   create_table "admins", force: :cascade do |t|
     t.string "email", null: false
     t.string "password_digest", null: false
@@ -85,9 +85,15 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_27_000900) do
     t.string "cover_asset"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "supplier_id"
+    t.integer "placement", default: 0, null: false
+    t.string "cta_label"
+    t.string "external_url"
     t.index ["category_id"], name: "index_posts_on_category_id"
+    t.index ["placement"], name: "index_posts_on_placement"
     t.index ["slug"], name: "index_posts_on_slug", unique: true
     t.index ["status", "published_at"], name: "index_posts_on_status_and_published_at"
+    t.index ["supplier_id"], name: "index_posts_on_supplier_id"
   end
 
   create_table "subscriptions", force: :cascade do |t|
@@ -130,6 +136,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_27_000900) do
   add_foreign_key "inquiries", "materials"
   add_foreign_key "inquiries", "suppliers"
   add_foreign_key "posts", "categories"
+  add_foreign_key "posts", "suppliers", on_delete: :nullify
   add_foreign_key "supplier_materials", "materials"
   add_foreign_key "supplier_materials", "suppliers"
 end

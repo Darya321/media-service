@@ -13,6 +13,49 @@ class PostTest < ActiveSupport::TestCase
   test "supports every approved publication kind and state" do
     assert_equal %w[article guide review interview news], Post.kinds.keys
     assert_equal %w[draft published], Post.statuses.keys
+    assert_equal %w[editorial partner external], Post.placements.keys
+  end
+
+  test "editorial post does not require a supplier" do
+    post = build_post(placement: :editorial)
+
+    assert post.valid?
+    assert_nil post.supplier
+  end
+
+  test "partner post requires a supplier" do
+    post = build_post(placement: :partner)
+
+    refute post.valid?
+    assert post.errors[:supplier].any?
+
+    post.supplier = suppliers(:kraft_factory)
+
+    assert post.valid?
+  end
+
+  test "external placement requires a safe absolute web url" do
+    post = build_post(placement: :external)
+
+    refute post.valid?
+    assert post.errors[:external_url].any?
+
+    post.external_url = "javascript:alert('unsafe')"
+
+    refute post.valid?
+    assert post.errors[:external_url].any?
+
+    post.external_url = "https://partner.example/offers"
+
+    assert post.valid?
+  end
+
+  test "promotable excludes a partner post whose supplier was removed" do
+    post = build_post(placement: :partner, supplier: suppliers(:kraft_factory))
+    post.save!
+    post.update_column(:supplier_id, nil)
+
+    refute_includes Post.promotable, post
   end
 
   test "generates a stable slug from its title" do
@@ -42,5 +85,19 @@ class PostTest < ActiveSupport::TestCase
     assert_includes visible, posts(:published_without_date)
     refute_includes visible, posts(:draft_article)
     refute_includes visible, posts(:future_article)
+  end
+
+  private
+
+  def build_post(**attributes)
+    Post.new({
+      category: categories(:materials),
+      title: "Новый материал",
+      slug: "new-media-post-#{SecureRandom.hex(4)}",
+      summary: "Краткое описание.",
+      body: "Основной текст.",
+      kind: :article,
+      status: :draft
+    }.merge(attributes))
   end
 end

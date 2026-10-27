@@ -22,6 +22,36 @@ published_without_date:
   featured: false
   cover_asset:
 
+partner_article:
+  category: production
+  supplier: kraft_factory
+  title: Новая линия коробок
+  slug: partner-box-line
+  summary: Поставщик рассказывает о производстве небольших тиражей.
+  body: Партнёрский материал о возможностях фабрики.
+  kind: 4
+  status: 1
+  published_at: <%= 2.days.ago.to_fs(:db) %>
+  featured: false
+  cover_asset: material-corrugated-cardboard.jpeg
+  placement: 1
+  cta_label: О компании
+
+external_placement:
+  category: materials
+  title: Подготовка упаковки к маркетплейсам
+  slug: marketplace-packaging-service
+  summary: Предложение услуги для небольших интернет-магазинов.
+  body: Расширенное рекламное размещение учебного проекта.
+  kind: 0
+  status: 1
+  published_at: <%= 3.days.ago.to_fs(:db) %>
+  featured: false
+  cover_asset: material-craft-cardboard.jpeg
+  placement: 2
+  cta_label: Смотреть предложение
+  external_url: https://partner.example/offers
+
 draft_article:
   category: materials
   title: Черновик обзора
