@@ -5,7 +5,7 @@ class HomepageFlowTest < ApplicationSystemTestCase
     visit root_path
 
     assert_selector "body[data-controller~='typography']"
-    assert_selector ".hero-shell__wordmark[data-full-bleed-wordmark]", text: "Упаковано"
+    assert_selector ".hero-shell__stage .identity-wordmark[data-full-bleed-wordmark]", text: "Упаковано"
   end
 
   test "homepage connects its tools content and local subscription" do

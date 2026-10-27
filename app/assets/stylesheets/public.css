@@ -179,32 +179,43 @@
 }
 
 .hero-shell {
-  min-height: 36rem;
-  padding-block: clamp(3rem, 7vw, 7rem);
+  min-height: 43rem;
+  padding-block: clamp(2.5rem, 5vw, 5rem) clamp(4rem, 7vw, 7rem);
   border-bottom: 1px solid var(--color-line);
   overflow: hidden;
 }
 
-.hero-shell__wordmark {
+.hero-shell__stage {
+  position: relative;
+  min-height: 36rem;
+}
+
+.identity-wordmark {
+  position: absolute;
+  z-index: 0;
+  top: clamp(1rem, 2vw, 2rem);
+  left: 50%;
   width: 100vw;
-  margin: 0 0 0 calc(50% - 50vw);
+  margin: 0;
   overflow: clip;
   color: var(--color-white);
-  font-size: var(--text-title);
-  font-weight: var(--font-weight-medium);
-  letter-spacing: -0.075em;
+  font-family: var(--font-identity);
+  font-size: clamp(6.75rem, 13.8vw, 14rem);
+  font-weight: 400;
+  letter-spacing: -0.065em;
   line-height: 0.76;
   text-align: center;
   text-transform: uppercase;
+  transform: translateX(-50%);
   white-space: nowrap;
 }
 
-.hero-shell__layout {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(22rem, 1fr));
-  align-items: end;
-  gap: var(--space-7);
-  margin-top: clamp(2rem, 4vw, 4rem);
+.hero-shell__copy {
+  position: absolute;
+  z-index: 3;
+  bottom: 0;
+  left: 0;
+  max-width: 42rem;
 }
 
 .hero-shell h1,
@@ -216,7 +227,7 @@
 
 .hero-shell h1 {
   max-width: 18ch;
-  font-size: clamp(2.3rem, 4vw, 3.8rem);
+  font-size: clamp(2.5rem, 4vw, 3.8rem);
 }
 
 .editorial-page h1 {
@@ -231,8 +242,13 @@
 }
 
 .hero-shell__art {
-  width: min(100%, 42rem);
-  justify-self: center;
+  position: absolute;
+  z-index: 2;
+  top: clamp(8.5rem, 15vw, 13rem);
+  left: 66%;
+  width: min(38vw, 34.125rem);
+  height: auto;
+  transform: translateX(-50%);
 }
 
 .editorial-page {
@@ -1775,21 +1791,148 @@
 }
 
 .home-calculator__result {
-  display: flex;
+  position: relative;
+  display: grid;
   min-height: 24rem;
   padding: clamp(1.5rem, 3vw, 3rem);
-  justify-content: center;
-  flex-direction: column;
+  grid-template-rows: auto auto 1fr auto;
+  gap: var(--space-5);
   border-radius: var(--radius-card);
   background: var(--color-paper);
   color: var(--color-ink);
+  overflow: hidden;
 }
 
-.home-calculator__result strong {
+.home-calculator__result::before {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, rgb(206 206 200 / 38%) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(206 206 200 / 38%) 1px, transparent 1px);
+  background-size: 5rem 5rem;
+  content: "";
+  pointer-events: none;
+}
+
+.home-calculator__result > * {
+  position: relative;
+  z-index: 1;
+}
+
+.home-calculator__result-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-5);
+}
+
+.home-calculator__result-heading span {
+  display: block;
+  margin-bottom: var(--space-2);
+  color: var(--color-muted);
+  font-size: 0.68rem;
+  font-weight: var(--font-weight-medium);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.home-calculator__result-heading p {
+  margin: 0;
+  font-weight: var(--font-weight-medium);
+}
+
+.home-calculator__result-heading strong {
   color: var(--color-forest);
-  font-size: clamp(4.5rem, 9vw, 8.5rem);
+  font-size: clamp(3.7rem, 7vw, 6.5rem);
   letter-spacing: -0.08em;
-  line-height: 0.9;
+  line-height: 0.78;
+  white-space: nowrap;
+}
+
+.home-calculator__meta {
+  display: grid;
+  margin: 0;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-block: 1px solid var(--color-line);
+}
+
+.home-calculator__meta div {
+  padding: var(--space-3) var(--space-3) var(--space-3) 0;
+}
+
+.home-calculator__meta dt {
+  color: var(--color-muted);
+  font-size: 0.68rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.home-calculator__meta dd {
+  margin: var(--space-1) 0 0;
+  font-size: 0.82rem;
+  font-weight: var(--font-weight-medium);
+}
+
+.price-chart {
+  display: grid;
+  min-height: 11rem;
+  align-self: end;
+  grid-template-rows: 1fr auto;
+  gap: var(--space-2);
+}
+
+.price-chart__grid {
+  display: grid;
+  min-height: 9rem;
+  padding-inline: var(--space-2);
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  align-items: end;
+  gap: clamp(0.45rem, 1.2vw, 1rem);
+  border-bottom: 1px solid var(--color-ink);
+}
+
+.price-chart__bar {
+  display: block;
+  min-height: 2rem;
+  border-radius: 0.4rem 0.4rem 0 0;
+  background: #d8e6b5;
+}
+
+.price-chart__bar--1 { height: 100%; }
+.price-chart__bar--2 { height: 78%; }
+.price-chart__bar--3 { height: 62%; }
+.price-chart__bar--4 { height: 46%; }
+.price-chart__bar--5 { height: 34%; }
+
+.price-chart__bar.is-active {
+  background: var(--color-accent);
+  box-shadow: inset 0 0 0 1px rgb(8 9 8 / 16%);
+}
+
+.price-chart__labels {
+  display: grid;
+  margin: 0;
+  padding: 0 var(--space-2);
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: clamp(0.45rem, 1.2vw, 1rem);
+  list-style: none;
+}
+
+.price-chart__labels li {
+  color: var(--color-muted);
+  font-size: 0.65rem;
+  text-align: center;
+}
+
+.price-chart__labels li.is-active {
+  color: var(--color-ink);
+  font-weight: var(--font-weight-semibold);
+}
+
+.home-calculator__disclaimer {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 0.78rem;
 }
 
 .home-section__heading {

@@ -18,9 +18,38 @@
       <%= submit_tag "Рассчитать стоимость", class: "button button--accent" %>
     <% end %>
   </div>
+  <% selected_material = materials.find { |material| material.slug == values[:material_slug] } %>
   <aside class="home-calculator__result" data-home-reference-price>
-    <p>Ориентировочная цена за штуку</p>
-    <strong><%= result.unit_price.to_i %> ₽</strong>
-    <p>Предварительный расчёт — точную цену назовёт компания.</p>
+    <div class="home-calculator__result-heading">
+      <div>
+        <span>Расчет 01</span>
+        <p>Ориентировочная цена за штуку</p>
+      </div>
+      <strong><%= result.unit_price.to_i %> ₽</strong>
+    </div>
+
+    <dl class="home-calculator__meta">
+      <div><dt>Материал</dt><dd><%= selected_material&.name %></dd></div>
+      <div><dt>Регион</dt><dd><%= values[:region] %></dd></div>
+      <div><dt>Тираж</dt><dd><%= values[:quantity] %> шт.</dd></div>
+    </dl>
+
+    <div class="price-chart"
+         role="img"
+         aria-label="Сравнение ориентировочной цены для тиражей от 100 до 3000 штук; выбран тираж <%= values[:quantity] %> штук">
+      <div class="price-chart__grid" aria-hidden="true">
+        <% [100, 300, 500, 1000, 3000].each_with_index do |quantity, index| %>
+          <i class="price-chart__bar price-chart__bar--<%= index + 1 %> <%= "is-active" if quantity == values[:quantity].to_i %>"
+             data-quantity="<%= quantity %>"></i>
+        <% end %>
+      </div>
+      <ol class="price-chart__labels" aria-hidden="true">
+        <% [100, 300, 500, 1000, 3000].each do |quantity| %>
+          <li class="<%= "is-active" if quantity == values[:quantity].to_i %>"><%= quantity %></li>
+        <% end %>
+      </ol>
+    </div>
+
+    <p class="home-calculator__disclaimer">Предварительный расчет — точную цену назовет компания.</p>
   </aside>
 </section>
