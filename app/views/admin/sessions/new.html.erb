@@ -1,0 +1,19 @@
+<% content_for :title, "Вход — Упаковано" %>
+
+<section class="admin-login" aria-labelledby="admin-login-title">
+  <p class="eyebrow">Панель управления</p>
+  <h1 id="admin-login-title">Вход для редактора</h1>
+  <p>Используйте учётную запись администратора, созданную локально.</p>
+
+  <%= form_with url: admin_session_path, scope: :session, class: "admin-form admin-login__form" do |form| %>
+    <div class="field">
+      <%= form.label :email, "Email" %>
+      <%= form.email_field :email, required: true, autocomplete: "username", autofocus: true %>
+    </div>
+    <div class="field">
+      <%= form.label :password, "Пароль" %>
+      <%= form.password_field :password, required: true, autocomplete: "current-password" %>
+    </div>
+    <%= form.submit "Войти", class: "button button--accent" %>
+  <% end %>
+</section>

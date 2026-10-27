@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <title><%= content_for(:title) || "Упаковано — панель управления" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="#294F23">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body class="admin-page">
+    <a class="skip-link" href="#admin-content">Перейти к содержанию</a>
+
+    <header class="admin-header">
+      <%= link_to "УПАКОВАНО", admin_root_path, class: "admin-header__brand" %>
+      <% if admin_signed_in? %>
+        <div class="admin-header__account">
+          <span><%= current_admin.email %></span>
+          <%= button_to "Выйти", admin_session_path, method: :delete, class: "button button--small button--outline" %>
+        </div>
+      <% else %>
+        <%= link_to "На сайт", root_path, class: "button button--small button--outline" %>
+      <% end %>
+    </header>
+
+    <div class="admin-shell<%= ' admin-shell--guest' unless admin_signed_in? %>">
+      <% if admin_signed_in? %>
+        <nav class="admin-nav" aria-label="Панель управления">
+          <%= link_to "Обзор", admin_root_path, class: admin_nav_class(admin_root_path) %>
+          <%= link_to "Публикации", admin_posts_path, class: admin_nav_class(admin_posts_path) %>
+          <%= link_to "Категории", admin_categories_path, class: admin_nav_class(admin_categories_path) %>
+          <%= link_to "Материалы", admin_materials_path, class: admin_nav_class(admin_materials_path) %>
+          <%= link_to "Поставщики", admin_suppliers_path, class: admin_nav_class(admin_suppliers_path) %>
+          <%= link_to "Заявки", admin_inquiries_path, class: admin_nav_class(admin_inquiries_path) %>
+          <%= link_to "Подписки", admin_subscriptions_path, class: admin_nav_class(admin_subscriptions_path) %>
+        </nav>
+      <% end %>
+
+      <main id="admin-content" class="admin-content">
+        <%= render "shared/flash" %>
+        <%= yield %>
+      </main>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,48 @@
+<% content_for :title, "Обзор — Упаковано" %>
+
+<section class="admin-heading">
+  <p class="eyebrow">Администрирование</p>
+  <h1>Панель управления</h1>
+  <p>Контент, каталог и учебные обращения сервиса в одном месте.</p>
+</section>
+
+<section class="admin-stats" aria-label="Сводка">
+  <% { posts: "Публикации", materials: "Материалы", suppliers: "Поставщики", inquiries: "Заявки" }.each do |key, label| %>
+    <article class="admin-stat">
+      <span class="admin-stat__value" data-admin-count="<%= key %>"><%= @counts.fetch(key) %></span>
+      <h2><%= label %></h2>
+    </article>
+  <% end %>
+</section>
+
+<section class="admin-panel">
+  <div class="admin-panel__heading">
+    <div>
+      <p class="eyebrow">Последние обращения</p>
+      <h2>Новые заявки</h2>
+    </div>
+    <%= link_to "Все заявки", admin_inquiries_path, class: "button button--small button--outline" %>
+  </div>
+
+  <% if @recent_inquiries.any? %>
+    <div class="admin-table-wrap">
+      <table class="admin-table">
+        <thead>
+          <tr><th>Email</th><th>Товар</th><th>Тираж</th><th>Статус</th></tr>
+        </thead>
+        <tbody>
+          <% @recent_inquiries.each do |inquiry| %>
+            <tr>
+              <td><%= inquiry.email %></td>
+              <td><%= inquiry.product_type %></td>
+              <td><%= inquiry.quantity %></td>
+              <td><%= inquiry.status %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% else %>
+    <p>Заявок пока нет.</p>
+  <% end %>
+</section>
