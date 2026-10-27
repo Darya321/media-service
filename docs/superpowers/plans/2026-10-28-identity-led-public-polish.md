@@ -10,6 +10,8 @@
 
 **Spec:** `docs/superpowers/specs/2026-10-28-identity-led-public-polish-design.md`
 
+**Handoff status (2026-10-28):** Tasks 1–3 are implemented in commits `60f9b3a`, `dfcd770`, and `f1f09a7`. Resume at Task 4. The detailed continuation brief is `docs/HANDOFF-2026-10-28.md`; the unchecked boxes below are the original execution checklist, not a claim that completed Tasks must be repeated.
+
 ## Global Constraints
 
 - `/soon` is a separate route and must not replace `/`.
