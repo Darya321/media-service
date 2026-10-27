@@ -1,17 +1,20 @@
 <% content_for :title, "Упаковано — упаковка, которая работает на бизнес" %>
 
-<section class="hero-shell">
-  <div class="container">
-    <p class="hero-shell__wordmark" aria-hidden="true">Упаковано</p>
-    <div class="hero-shell__layout">
-      <div>
-        <p class="eyebrow">Медиа + инструменты</p>
-        <h1>Упаковка, которая работает на бизнес</h1>
-        <p class="hero-shell__lead">Исследуем материалы. Сравниваем затраты. Выбираем осознанно.</p>
-      </div>
-      <%= image_tag "figma/hero-packaging-island-node-203-270.png",
-                    class: "hero-shell__art",
-                    alt: "Открытая картонная коробка и листы гофрокартона на зелёном острове" %>
+<div class="homepage" data-controller="repeat-order">
+  <%= render "hero" %>
+  <%= render "tools" %>
+  <%= render "steps" %>
+  <%= render "calculator", materials: @materials, values: @calculator_values, result: @reference_result %>
+  <%= render "supplier_comparison", suppliers: @suppliers %>
+  <%= render "media", posts: @posts %>
+  <%= render "repeat_order" %>
+  <%= render "manufacturer_cta" %>
+
+  <section id="subscription" class="home-subscription container">
+    <div>
+      <p class="eyebrow">Письма об упаковке</p>
+      <h2>Новые разборы — без лишнего шума</h2>
     </div>
-  </div>
-</section>
+    <%= render "subscriptions/form", subscription: @subscription, message: nil %>
+  </section>
+</div>

@@ -1,0 +1,9 @@
+<div id="subscription-form" class="subscription-form">
+  <% if message.present? %><p class="subscription-form__message" role="status"><%= message %></p><% end %>
+  <%= form_with model: subscription, url: subscriptions_path do |form| %>
+    <%= form.label :email, "Email для материалов", class: "visually-hidden" %>
+    <%= form.email_field :email, placeholder: "you@example.ru", required: true, aria: { label: "Email для материалов" } %>
+    <%= form.submit "Подписаться", class: "button button--dark" %>
+  <% end %>
+  <small>Только учебная подписка внутри проекта, без рассылки писем.</small>
+</div>

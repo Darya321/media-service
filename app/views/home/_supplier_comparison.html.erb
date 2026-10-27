@@ -1,0 +1,16 @@
+<section id="suppliers" class="home-section container">
+  <div class="home-section__heading">
+    <div><p class="eyebrow">Поставщики</p><h2>Сравните компании по одинаковым критериям</h2></div>
+    <%= link_to "Все поставщики", suppliers_path, class: "button" %>
+  </div>
+  <div class="home-supplier-list">
+    <% suppliers.each do |supplier| %>
+      <article data-home-supplier="<%= supplier.slug %>">
+        <div><strong><%= supplier.name %></strong><% if supplier.promoted? %><span>Реклама</span><% end %></div>
+        <p><%= supplier.specialization %></p>
+        <p>от <%= supplier.minimum_order %> шт · от <%= supplier.unit_price_from.to_i %> ₽</p>
+        <%= link_to "Подробнее", supplier_path(supplier) %>
+      </article>
+    <% end %>
+  </div>
+</section>

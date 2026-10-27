@@ -1,0 +1,26 @@
+<section id="home-calculator" class="home-calculator container">
+  <div class="home-calculator__form">
+    <p class="eyebrow">Калькулятор</p>
+    <h2>Рассчитайте упаковку под свой товар</h2>
+    <%= form_with url: calculator_path, method: :get, data: { turbo: false } do %>
+      <%= hidden_field_tag :product_type, values[:product_type], data: { repeat_order_target: "productType" } %>
+      <%= hidden_field_tag :weight_grams, values[:weight_grams], data: { repeat_order_target: "weight" } %>
+      <%= hidden_field_tag :fragile, values[:fragile], data: { repeat_order_target: "fragile" } %>
+      <%= hidden_field_tag :print_option, values[:print_option], data: { repeat_order_target: "printOption" } %>
+      <div class="field-grid field-grid--home">
+        <div class="field"><%= label_tag :length_mm, "Длина, мм" %><%= number_field_tag :length_mm, values[:length_mm], data: { repeat_order_target: "length" } %></div>
+        <div class="field"><%= label_tag :width_mm, "Ширина, мм" %><%= number_field_tag :width_mm, values[:width_mm], data: { repeat_order_target: "width" } %></div>
+        <div class="field"><%= label_tag :height_mm, "Высота, мм" %><%= number_field_tag :height_mm, values[:height_mm], data: { repeat_order_target: "height" } %></div>
+        <div class="field"><%= label_tag :quantity, "Тираж, шт" %><%= number_field_tag :quantity, values[:quantity], data: { repeat_order_target: "quantity" } %></div>
+        <div class="field"><%= label_tag :material_slug, "Материал" %><%= select_tag :material_slug, options_for_select(materials.map { |material| [material.name, material.slug] }, values[:material_slug]), data: { repeat_order_target: "material" } %></div>
+        <div class="field"><%= label_tag :region, "Регион" %><%= select_tag :region, options_for_select(["Москва", "Санкт-Петербург", "Другой регион"], values[:region]), data: { repeat_order_target: "region" } %></div>
+      </div>
+      <%= submit_tag "Рассчитать стоимость", class: "button button--accent" %>
+    <% end %>
+  </div>
+  <aside class="home-calculator__result" data-home-reference-price>
+    <p>Ориентировочная цена за штуку</p>
+    <strong><%= result.unit_price.to_i %> ₽</strong>
+    <p>Предварительный расчёт — точную цену назовёт компания.</p>
+  </aside>
+</section>

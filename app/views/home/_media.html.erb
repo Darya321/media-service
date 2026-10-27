@@ -1,0 +1,16 @@
+<section id="media" class="home-section container">
+  <div class="home-section__heading">
+    <div><p class="eyebrow">Медиа</p><h2>Разбираемся в упаковке</h2></div>
+    <%= link_to "Все публикации", posts_path, class: "button" %>
+  </div>
+  <div class="home-media-grid">
+    <% posts.each do |post| %>
+      <article data-home-post="<%= post.slug %>">
+        <div class="home-media-grid__cover home-media-grid__cover--<%= post.kind %>"></div>
+        <p class="eyebrow"><%= post_kind_label(post.kind) %></p>
+        <h3><%= link_to post.title, post_path(post) %></h3>
+        <p><%= post.summary %></p>
+      </article>
+    <% end %>
+  </div>
+</section>

@@ -1,0 +1,26 @@
+<section id="tools" class="home-tools container" aria-labelledby="tools-title">
+  <h2 id="tools-title" class="visually-hidden">Инструменты сервиса</h2>
+  <article class="home-tool-card">
+    <p class="eyebrow">Разобраться</p>
+    <h3>Материалы и понятные инструкции</h3>
+    <%= image_tag "figma/materials-tool-node-206-1169.svg", alt: "", aria: { hidden: true } %>
+    <div class="home-tool-card__materials">
+      <% @materials.first(3).each do |material| %>
+        <%= link_to material.name, material_path(material), data: { home_material: material.slug } %>
+      <% end %>
+    </div>
+    <%= link_to "Все материалы", materials_path %>
+  </article>
+  <article class="home-tool-card">
+    <p class="eyebrow">Рассчитать</p>
+    <h3>Ориентир по цене упаковки</h3>
+    <%= image_tag "figma/calculator-tool-node-206-1176.svg", alt: "", aria: { hidden: true } %>
+    <%= link_to "Открыть калькулятор", calculator_path %>
+  </article>
+  <article class="home-tool-card">
+    <p class="eyebrow">Найти поставщика</p>
+    <h3>Компании по одинаковым критериям</h3>
+    <%= image_tag "figma/supplier-tool-node-206-1228.svg", alt: "", aria: { hidden: true } %>
+    <%= link_to "Сравнить компании", suppliers_path %>
+  </article>
+</section>
