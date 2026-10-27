@@ -102,6 +102,26 @@
   .supplier-profile__grid {
     grid-template-columns: 1fr;
   }
+
+  .post-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .post-card:nth-child(3n + 2) {
+    margin-top: 0;
+  }
+
+  .post-card:nth-child(even) {
+    margin-top: var(--space-7);
+  }
+
+  .publication__layout {
+    grid-template-columns: 1fr;
+  }
+
+  .publication__next {
+    position: static;
+  }
 }
 
 @media (max-width: 560px) {
@@ -170,6 +190,24 @@
 
   .inquiry-confirmation__actions .button {
     width: 100%;
+  }
+
+  .post-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .post-card:nth-child(even) {
+    margin-top: 0;
+  }
+
+  .media-categories {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: var(--space-2);
+  }
+
+  .media-categories a {
+    flex: 0 0 auto;
   }
 }
 

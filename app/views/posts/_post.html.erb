@@ -1,0 +1,20 @@
+<article class="post-card <%= "post-card--featured" if post.featured? %>" data-post-slug="<%= post.slug %>">
+  <%= link_to post_path(post), class: "post-card__link" do %>
+    <div class="post-card__cover post-card__cover--<%= post.kind %>">
+      <% if (asset = post_cover_asset(post)) %>
+        <%= image_tag asset, alt: "Иллюстрация к публикации «#{post.title}»" %>
+      <% else %>
+        <span aria-hidden="true"><%= post_kind_label(post.kind).first %></span>
+      <% end %>
+    </div>
+    <div class="post-card__body">
+      <div class="post-card__meta">
+        <span><%= post_kind_label(post.kind) %></span>
+        <span><%= post.category.name %></span>
+      </div>
+      <h2><%= post.title %></h2>
+      <p><%= post.summary %></p>
+      <span class="post-card__more">Читать →</span>
+    </div>
+  <% end %>
+</article>

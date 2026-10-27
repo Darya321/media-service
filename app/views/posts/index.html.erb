@@ -1,0 +1,24 @@
+<% content_for :title, "Медиа об упаковке — Упаковано" %>
+
+<section class="media-page container">
+  <header class="media-page__header">
+    <p class="eyebrow">Медиа</p>
+    <h1>Разбираемся в упаковке</h1>
+    <p>Материалы, инструкции и разговоры с производителями — простым языком и с пользой для малого бизнеса.</p>
+  </header>
+
+  <nav class="media-categories" aria-label="Категории публикаций">
+    <%= link_to "Все материалы", posts_path, class: "#{"is-active" unless @selected_category}" %>
+    <% @categories.each do |category| %>
+      <%= link_to category.name, category_path(category), class: "#{"is-active" if @selected_category == category}" %>
+    <% end %>
+  </nav>
+
+  <% if @posts.any? %>
+    <div class="post-grid">
+      <%= render @posts %>
+    </div>
+  <% else %>
+    <div class="empty-state card"><h2>В этой категории пока нет публикаций</h2></div>
+  <% end %>
+</section>

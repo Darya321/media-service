@@ -1,0 +1,32 @@
+<% content_for :title, "#{@post.title} — Упаковано" %>
+
+<article class="publication container" data-post-slug="<%= @post.slug %>">
+  <header class="publication__header">
+    <%= link_to "← Медиа", posts_path, class: "back-link" %>
+    <div class="publication__meta">
+      <%= link_to @post.category.name, category_path(@post.category) %>
+      <span><%= post_kind_label(@post.kind) %></span>
+    </div>
+    <h1><%= @post.title %></h1>
+    <p class="publication__summary"><%= @post.summary %></p>
+  </header>
+
+  <div class="publication__layout">
+    <div class="publication__body">
+      <%= simple_format(h(@post.body)) %>
+    </div>
+    <aside class="publication__next card">
+      <p class="eyebrow">Следующий шаг</p>
+      <h2>Примерьте знания к своему товару</h2>
+      <%= link_to "Сравнить материалы", materials_path, class: "button button--dark" %>
+      <%= link_to "Рассчитать упаковку", calculator_path, class: "button button--accent" %>
+    </aside>
+  </div>
+
+  <% if @related_posts.any? %>
+    <section class="related-posts">
+      <h2>Ещё по теме</h2>
+      <div class="post-grid"><%= render @related_posts %></div>
+    </section>
+  <% end %>
+</article>

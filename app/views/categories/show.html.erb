@@ -1,0 +1,16 @@
+<% content_for :title, "#{@category.name} — медиа Упаковано" %>
+
+<section class="media-page container">
+  <header class="media-page__header">
+    <%= link_to "← Все публикации", posts_path, class: "back-link" %>
+    <p class="eyebrow">Категория</p>
+    <h1><%= @category.name %></h1>
+    <p><%= @category.description %></p>
+  </header>
+
+  <% if @posts.any? %>
+    <div class="post-grid"><%= render @posts %></div>
+  <% else %>
+    <div class="empty-state card"><h2>В этой категории пока нет публикаций</h2></div>
+  <% end %>
+</section>

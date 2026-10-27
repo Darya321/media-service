@@ -6,6 +6,9 @@ module ApplicationHelper
     "interview" => "Интервью",
     "news" => "Новость"
   }.freeze
+  POST_COVER_ASSETS = {
+    "cardboard-guide.svg" => "figma/materials-tool-node-206-1169.svg"
+  }.freeze
 
   def nav_link_to(label, path, **options)
     active = current_page?(path)
@@ -16,5 +19,9 @@ module ApplicationHelper
 
   def post_kind_label(kind)
     POST_KIND_LABELS.fetch(kind.to_s, kind.to_s.humanize)
+  end
+
+  def post_cover_asset(post)
+    POST_COVER_ASSETS[post.cover_asset]
   end
 end
